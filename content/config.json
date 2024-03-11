@@ -1,11 +1,11 @@
 {
   "title": "Blog by Kayoung Kim",
   "url": "https://kayoungkimjs.github.io",
-  "subtitle": "프론트엔드 개발자 김가영입니다.",
+  "subtitle": "프론트엔드 개발자 김가영의 개발 공부 블로그",
   "copyright": "© All rights reserved.",
   "googleAnalyticsId": "UA-73379983-2",
   "disqusShortname": "",
-  "postsLimit": 4,
+  "postsLimit": 5,
   "pathPrefix": "/",
   "menu": [
     {
@@ -13,35 +13,22 @@
       "path": "/"
     },
     {
-      "label": "About me",
-      "path": "/pages/about"
+      "label": "Journals",
+      "path": "/pages/journals"
     },
     {
-      "label": "Contact me",
-      "path": "/pages/contacts"
+      "label": "About",
+      "path": "/pages/about"
     }
   ],
   "author": {
     "name": "Kayoung Kim",
     "photo": "/photo.jpg",
-    "bio": "프론트엔드 개발자 김가영입니다.",
+    "bio": "프론트엔드 개발자 김가영입니다. 개발 공부와 일에 대한 생각을 주로 씁니다. kykim.dev@gmail.com",
     "contacts": {
-      "rss": "",
-      "email": "",
-      "github": "#",
-      "facebook": "#",
-      "telegram": "#",
-      "twitter": "#",
-      "linkedin": "#",
-      "instagram": "#",
-      "mastodon": "#",
-      "line": "",
-      "weibo": "",
-      "gitlab": "",
-      "medium": "",
-      "youtube": "",
-      "codepen": "",
-      "soundcloud": ""
+      "email": "kykim.dev@gmail.com",
+      "github": "https://github.com/Kayoungkimjs",
+      "linkedin": "#"
     }
   }
 }
