@@ -17,7 +17,7 @@
   "scripts": {
     "build": "npm run clean && gatsby build",
     "clean": "rimraf .cache public",
-    "deploy": "yarn run clean && gatsby build && gh-pages -d public -b master",
+    "deploy": "npm run clean && gatsby build && gh-pages -d public -b master",
     "format": "npm run format:ts && npm run format:scss",
     "format:scss": "stylelint \"src/**/*.scss\" --fix",
     "format:ts": "eslint \"src\" --ext .tsx,.ts --fix && prettier --write .",
