@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Blog by Kayoung Kim]]></title><description><![CDATA[Blog by Kayoung Kim]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 11 Mar 2024 06:47:42 GMT</lastBuildDate><item><title><![CDATA[React 반응형 라이브러리로 Web/Mobile 구분하기]]></title><description><![CDATA[React로 어플리케이션 구현 시, PC와 Mobile을 구분해서 반응형으로 제작할 때 npm 라이브러리를 사용할 수 있다.]]></description><link>https://kayoungkimjs.github.io/posts/React-반응형-라이브러리로-Web/Mobile-구분하기</link><guid isPermaLink="false">https://kayoungkimjs.github.io/posts/React-반응형-라이브러리로-Web/Mobile-구분하기</guid><pubDate>Tue, 08 Aug 2023 22:40:32 GMT</pubDate><content:encoded>&lt;p&gt;&lt;span
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Blog by Kayoung Kim]]></title><description><![CDATA[Blog by Kayoung Kim]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 12 Mar 2024 02:44:17 GMT</lastBuildDate><item><title><![CDATA[React 반응형 라이브러리로 Web/Mobile 구분하기]]></title><description><![CDATA[React로 어플리케이션 구현 시, PC와 Mobile을 구분해서 반응형으로 제작할 때 npm 라이브러리를 사용할 수 있다.]]></description><link>https://kayoungkimjs.github.io/posts/React-반응형-라이브러리로-Web/Mobile-구분하기</link><guid isPermaLink="false">https://kayoungkimjs.github.io/posts/React-반응형-라이브러리로-Web/Mobile-구분하기</guid><pubDate>Tue, 08 Aug 2023 22:40:32 GMT</pubDate><content:encoded>&lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 960px; &quot;
     &gt;
@@ -215,12 +215,154 @@
 &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; Example&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;hr&gt;
 &lt;h2 id=&quot;정리&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%A0%95%EB%A6%AC&quot; aria-label=&quot;정리 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;정리&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;특정 브라우저 타입(Chrome, Safari, IE) 혹은 특정 카테고리 디바이스(all iPods..) 인식이 필요한 경우 &lt;code class=&quot;language-text&quot;&gt;react-device-detect&lt;/code&gt; 를,&lt;/li&gt;
 &lt;li&gt;전반적인 모바일 환경 대응이 필요한 경우에는 CSS ‘@media queries(&lt;code class=&quot;language-text&quot;&gt;react-responsive&lt;/code&gt;)’나 ‘matchMedia’ 를 쓸 수 있다.&lt;/li&gt;
-&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[Test]]></title><description><![CDATA[Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum.]]></description><link>https://kayoungkimjs.github.io/poststest</link><guid isPermaLink="false">https://kayoungkimjs.github.io/poststest</guid><pubDate>Tue, 01 Sep 2020 23:46:37 GMT</pubDate><content:encoded>&lt;p&gt;Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum.&lt;/p&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[프로젝트 개발 KTP 회고하기]]></title><description><![CDATA[하나의 프로젝트가 끝나면 회고가 필요하다. 그동안 개인으로만 해왔던 회고의 시간을 팀원들과 함께 해보는 시간을 가졌다.]]></description><link>https://kayoungkimjs.github.io/posts/프로젝트-개발-KTP-회고하기</link><guid isPermaLink="false">https://kayoungkimjs.github.io/posts/프로젝트-개발-KTP-회고하기</guid><pubDate>Sun, 08 Jan 2023 23:46:37 GMT</pubDate><content:encoded>&lt;p&gt;회고를 하는 방법은 다양하다. 그냥 일기처럼 자신이 어떤 과업을 수행했고, 그 과정에서 무엇을 배웠는지 적어내려가는 단순한 방법에서 조금 더 구체적이고 체계적인 방법론까지. 회사 홈페이지 제작 프로젝트를 마치고, 함께 작업한 팀원들과 회고의 시간을 갖고 싶었다. 그렇게 KTP 방식을 적용하게 되었다.&lt;/p&gt;
+&lt;h2 id=&quot;ktp&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#ktp&quot; aria-label=&quot;ktp permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;KTP&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Keep :&lt;/strong&gt; 프로젝트에서 만족했고, 앞으로의 업무에서 지속하고 싶은 부분&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Problem :&lt;/strong&gt; 프로젝트에서 부정적인 요소로 작용했거나 아쉬웠던 점&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Try :&lt;/strong&gt; Problem에 대한 해결 방식으로 다음 프로젝트에서 시도해볼 점&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;역할&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%97%AD%ED%95%A0&quot; aria-label=&quot;역할 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;strong&gt;역할&lt;/strong&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;강00 (FE/BE)
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;PC&lt;/strong&gt; 버전 About, Tech, Service, 이미지 슬라이드 UI 작업&lt;/li&gt;
+&lt;li&gt;알파/메인 서버 설정 및 배포&lt;/li&gt;
+&lt;li&gt;다국어 세팅, 모션 등 관련 작업 대응&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;김가영 (FE)
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;PC&lt;/strong&gt; 버전 Home, Service-냐호, Service-HSD, Service-Sensil, Crew&amp;#x26;Culture, 인터뷰 모달, CMC, Deli, News 페이지 UI 작업&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mobile&lt;/strong&gt; 버전 Home, Service, Service-HSD, Service-Sensil, 인터뷰 모달, CMC, Deli, News 페이지 UI 작업&lt;/li&gt;
+&lt;li&gt;테크 블로그 리뉴얼&lt;/li&gt;
+&lt;li&gt;알파/메인 서버 설정 및 배포&lt;/li&gt;
+&lt;li&gt;피드백 대응 및 UI 수정&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;주00 (FE)
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Mobile&lt;/strong&gt; 버전 About, Service-냐호, Tech, Crew&amp;#x26;Culture, 이미지 슬라이드 모달, 인터뷰 모달, GNB, Footer 페이지 UI 작업&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PC&lt;/strong&gt; 버전 Home 모션 적용, 냐호 슬라이드 생성, About 추가작업&lt;/li&gt;
+&lt;li&gt;테크 블로그 수정&lt;/li&gt;
+&lt;li&gt;피드백 대응 및 UI 수정&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;김00 (BE)
+&lt;ul&gt;
+&lt;li&gt;뉴스 (최신, 리스트) API 생성 및 페이지네이션 작업&lt;/li&gt;
+&lt;li&gt;관련 작업 대응&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;회고를-해보자&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%9A%8C%EA%B3%A0%EB%A5%BC-%ED%95%B4%EB%B3%B4%EC%9E%90&quot; aria-label=&quot;회고를 해보자 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;strong&gt;회고를 해보자&lt;/strong&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;프론트엔드-개발&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EA%B0%9C%EB%B0%9C&quot; aria-label=&quot;프론트엔드 개발 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;프론트엔드 개발&lt;/h2&gt;
+&lt;h3 id=&quot;keep&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#keep&quot; aria-label=&quot;keep permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Keep&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;첫 대외 서비스 페이지 구현&lt;/li&gt;
+&lt;li&gt;새로운 기술 적용
+&lt;ul&gt;
+&lt;li&gt;Nextjs&lt;/li&gt;
+&lt;li&gt;swiper, pagination 등 다양한 라이브러리 사용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;다국어 적용&lt;/li&gt;
+&lt;li&gt;다양한 레이아웃, 컴포넌트에 대한 퍼블리싱 학습이 많이 되었음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;problem&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#problem&quot; aria-label=&quot;problem permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Problem&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;pc/mobile 버전이 아닌 반응형 제작 필요
+&lt;ul&gt;
+&lt;li&gt;아이패드 등 다양한 모바일 기기에 대응 어려움&lt;/li&gt;
+&lt;li&gt;반응형으로 할 경우, 디자인 시안도 반응형이 되도록 제작&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;실제로 구현되지 않았던 기능들
+&lt;ul&gt;
+&lt;li&gt;난이도, 작업 기한, 인력 등 변수로 실제로 구현되지 않은 기능들이 있었음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Next 잘 쓴건가? 에 대한 고민
+&lt;ul&gt;
+&lt;li&gt;Next에 최적화 기능을 적절히 사용하지 못했다는 아쉬움&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;다국어 적용, UI 완성 후 변수 대처
+&lt;ul&gt;
+&lt;li&gt;UI 개발 완료 후 다국어 적용을 했을 때 깨지는 부분들이 다수 있었음&lt;/li&gt;
+&lt;li&gt;공통 css 적용 부분 수정시 다른곳에서 UI 가 이상해지는 경우가 있었음&lt;/li&gt;
+&lt;li&gt;윈도우 버전 확인 필수&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;기획 단계에서 개발자의 부재
+&lt;ul&gt;
+&lt;li&gt;모션 레퍼런스 공유나 개발 관점에서 물어보고 싶은 것들을 물어보고 상의할 수 있었다면 좋았을 듯&lt;/li&gt;
+&lt;li&gt;리소스, 디자인 시안 검토 등 초기 커뮤니케이션이 더 활발했어야&lt;/li&gt;
+&lt;li&gt;블로커, 진행사항에 따른 기한 설정, 인력 구성 등 필요&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;try&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#try&quot; aria-label=&quot;try permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Try&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;개발, 프로젝트 관리 역량 키우기
+&lt;ul&gt;
+&lt;li&gt;설계, Global css, 전체 레이아웃, 컴포넌트 구성, 코드 컨벤션 등 사전 합의 후 착수 (유지보수 효과적인 컴포넌트 만들기)&lt;/li&gt;
+&lt;li&gt;개발 전과 후 전체 개발 프로세스 체크리스트 만들어 관리 Next 오류 (Hydration), 성능 개선&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;구현되지 않은 기능 보완
+&lt;ul&gt;
+&lt;li&gt;애플 사이트 등 유저 인터렉션 많은 사이트 모션 공부하고 적용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;일정 산정은 어렵지만 챙기기
+&lt;ul&gt;
+&lt;li&gt;할 수 있는 것과 없는 것을 명확하게 구분하기&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;디자인 감수, 숙지 철저하게 하기
+&lt;ul&gt;
+&lt;li&gt;assets, 디자인 가이드 등 필요한 부분들은 미리 점검하고 한번에 요청하기&lt;/li&gt;
+&lt;li&gt;픽셀, 사이즈 등 제대로 제작되었는지 확인하기&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;라이브러리 쓸 때 공식문서 제대로 보고 사용할 수 있는 api 찾자&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;백엔드-개발&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%B0%B1%EC%97%94%EB%93%9C-%EA%B0%9C%EB%B0%9C&quot; aria-label=&quot;백엔드 개발 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;백엔드 개발&lt;/h2&gt;
+&lt;h3 id=&quot;keep-1&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#keep-1&quot; aria-label=&quot;keep 1 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Keep&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;뉴스 API 관련 작업&lt;/li&gt;
+&lt;li&gt;QueryDSL을 사용한 페이징 처리&lt;/li&gt;
+&lt;li&gt;알파 및 라이브 DB 뉴스 데이터 처리&lt;/li&gt;
+&lt;li&gt;다국어 처리 관련 도움&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;problem-1&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#problem-1&quot; aria-label=&quot;problem 1 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Problem&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;페이징 처리에서 기존 양식과 조금 다르게 개발되어 맞추는데 추가 작업이 들어감
+&lt;ul&gt;
+&lt;li&gt;페이징의 경우 양식을 프론트와 논의해 맞추면 다른 곳에서 사용할 때도 기존의 컴포넌트나 구조를 가져다 쓸 수 있을 것으로 보임&lt;/li&gt;
+&lt;li&gt;뉴스 이미지의 경우 s3가 아닌 서버에 올라가 있어 경로나 프론트 렌더링에서 문제가 발생함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;뉴스 정보에 대한 API를 개발하고 프론트와 연동해서 개발자의 추가 공수를 없애는 것이 필요할 듯&lt;/li&gt;
+&lt;li&gt;assets 리소스는 s3를 사용하는 것이 효과적&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;try-1&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#try-1&quot; aria-label=&quot;try 1 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Try&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;모듈화나 공통으로 뺄 수 있는 부분은 빼는 것이 필요해 보임
+&lt;ul&gt;
+&lt;li&gt;프론트 및 백엔드단의 API 소통 ( ex:페이징 )&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;서버나 환경에 의존성을 갖는 부분은 외부로 빼자 (ex: s3)&lt;/li&gt;
+&lt;li&gt;뉴스 관리를 위한 API 및 admin 페이지 개발&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;정리&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%A0%95%EB%A6%AC&quot; aria-label=&quot;정리 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;정리&lt;/h2&gt;
+&lt;p&gt;프로젝트를 진행하면서 개인적으로 말하지 못했던 고민과 개선사항에 대해 이야기 하고 나니 프로젝트 운영의 방향이 더욱 명확해졌다. 잘한 부분은 서로 칭찬하고 용기를 북돋아주고, 개발적인 고민을 나누다보니 함께 작업하는 팀원들을 믿고 작업을 완성했다는 것이 더욱 보람있었다. 프로젝트는 개발을 하는 그 순간 뿐 아니라 시작 전과 후의 전 과정이라는 것을 다시 한번 느꼈고, 개발자에게 회고가 얼마나 중요한지 몸소 실감하는 시간이었다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Test]]></title><description><![CDATA[Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum.]]></description><link>https://kayoungkimjs.github.io/posts/test</link><guid isPermaLink="false">https://kayoungkimjs.github.io/posts/test</guid><pubDate>Tue, 01 Sep 2020 23:46:37 GMT</pubDate><content:encoded>&lt;p&gt;Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 960px; &quot;
