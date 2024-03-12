@@ -15,7 +15,7 @@ interface Props {
 }
 
 const PostTemplate: React.FC<Props> = ({ data: { markdownRemark } }: Props) => (
-  <Layout>
+  <Layout children={undefined}>
     <Post post={markdownRemark} />
   </Layout>
 );

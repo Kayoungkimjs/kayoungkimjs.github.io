@@ -25,9 +25,9 @@ const IndexTemplate: React.FC<Props> = ({ data, pageContext }: Props) => {
   const { edges } = data.allMarkdownRemark;
 
   return (
-    <Layout>
+    <Layout children={undefined}>
       <Sidebar isIndex />
-      <Page>
+      <Page children={undefined}>
         <Feed edges={edges} />
         <Pagination
           prevPagePath={prevPagePath}

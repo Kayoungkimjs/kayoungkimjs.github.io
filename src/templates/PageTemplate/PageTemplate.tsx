@@ -21,9 +21,9 @@ const PageTemplate: React.FC<Props> = ({ data }: Props) => {
   const { title } = frontmatter;
 
   return (
-    <Layout>
+    <Layout children={undefined}>
       <Sidebar />
-      <Page title={title}>
+      <Page title={title} children={undefined}>
         <div dangerouslySetInnerHTML={{ __html: body }} />
       </Page>
     </Layout>
