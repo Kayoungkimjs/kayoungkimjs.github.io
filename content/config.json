@@ -1,5 +1,5 @@
 {
-  "title": "Blog by Kayoung Kim",
+  "title": "Kykim.dev",
   "url": "https://kayoungkimjs.github.io",
   "subtitle": "프론트엔드 개발자 김가영의 개발 공부 블로그",
   "copyright": "© All rights reserved.",
@@ -28,7 +28,7 @@
   "author": {
     "name": "Kayoung Kim",
     "photo": "/photo.jpg",
-    "bio": "프론트엔드 개발자 김가영입니다. 개발과 일에 대한 생각을 주로 씁니다. kykim.dev@gmail.com",
+    "bio": "프론트엔드 개발자 김가영입니다. 개발과 일에 대한 생각을 주로 씁니다. https://velog.io/@kykim_dev/posts (2023 이전 블로깅)",
     "contacts": {
       "github": "Kayoungkimjs",
       "linkedin": "#",
