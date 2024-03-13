@@ -1,0 +1,452 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 4.25.8"/><meta name="description" content="프로젝트의 Ngnix 경로를 바꾸거나 설정을 바꿔달라는 요청을 받았다. 급한 요청이기에 일단 메뉴얼대로 후다닥 처리한 후, Node와 Ngnix 개념에 대해 학습하고 설치해보며 알아갔다." data-gatsby-head="true"/><meta name="twitter:card" content="summary_large_image" data-gatsby-head="true"/><meta name="twitter:title" content="Node, Ngnix 설정하기 - Kykim.dev" data-gatsby-head="true"/><meta name="twitter:description" content="프로젝트의 Ngnix 경로를 바꾸거나 설정을 바꿔달라는 요청을 받았다. 급한 요청이기에 일단 메뉴얼대로 후다닥 처리한 후, Node와 Ngnix 개념에 대해 학습하고 설치해보며 알아갔다." data-gatsby-head="true"/><meta name="og:title" content="Node, Ngnix 설정하기 - Kykim.dev" data-gatsby-head="true"/><meta name="og:type" content="website" data-gatsby-head="true"/><meta name="og:description" content="프로젝트의 Ngnix 경로를 바꾸거나 설정을 바꿔달라는 요청을 받았다. 급한 요청이기에 일단 메뉴얼대로 후다닥 처리한 후, Node와 Ngnix 개념에 대해 학습하고 설치해보며 알아갔다." data-gatsby-head="true"/><meta name="image" content="https://kayoungkimjs.github.io/static/01cb36d9228743e801c2d44463088b96/image1.png" data-gatsby-head="true"/><meta name="og:image" content="https://kayoungkimjs.github.io/static/01cb36d9228743e801c2d44463088b96/image1.png" data-gatsby-head="true"/><meta name="twitter:image" content="https://kayoungkimjs.github.io/static/01cb36d9228743e801c2d44463088b96/image1.png" data-gatsby-head="true"/><meta name="theme-color" content="hsl(31, 92%, 62%)"/><style data-href="/styles.462ccd878fdc76b93a3f.css" data-identity="gatsby-global-css">:after,:before,:root{--color-white:#fff;--color-primary:#5c92ff;--color-secondary:#f7a145;--color-prism-background:#eaeaeb;--color-typographic-base-font:#242933;--color-typographic-link-p-font:#5c92ff;--color-typographic-link-s-font:#f7a145;--color-page-border:#eaeaeb;--color-page-background:#fff;--color-sidebar-border:#eaeaeb;--color-sidebar-border-fade:#fff;--color-contacts-border:#eaeaeb;--color-button-border:#eaeaeb;--color-button-color:#242933;--color-theme-switcher:#3f485a;--color-theme-switcher-hover:#5c92ff}.dark :after,.dark :before,:root.dark{--color-white:#fff;--color-primary:#5c92ff;--color-secondary:#f7a145;--color-prism-background:#191d24;--color-typographic-base-font:#fff;--color-typographic-link-p-font:#5c92ff;--color-typographic-link-s-font:#f7a145;--color-page-border:#3f485a;--color-page-background:#242933;--color-sidebar-border:#3f485a;--color-sidebar-border-fade:#242933;--color-contacts-border:#3f485a;--color-button-border:#3f485a;--color-button-color:#fff;--color-theme-switcher:#eaeaeb;--color-theme-switcher-hover:#5c92ff}html{font-size:100}body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;background:var(--color-page-background);color:var(--color-typographic-base-font);font-size:16px;line-height:1.625;margin:0 0 0 calc(100vw - 100%);text-rendering:optimizelegibility}body,h1,h2,h3,h4,h5,h6{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif}h1,h2,h3,h4,h5,h6{font-weight:600}h1{font-size:40px;line-height:52px;margin-bottom:26px;margin-top:104px}h2{font-size:27px;line-height:39px}h2,h3{margin-bottom:13px;margin-top:52px}h3{font-size:22px;line-height:26px}h4{font-size:19.2px;margin-top:39px}h4,h5{line-height:26px;margin-bottom:13px}h5,h6{font-size:16px;margin-top:65px}h6{line-height:26px;margin-bottom:13px}img{max-width:100%}hr,img{border:0;display:block}hr{background-image:linear-gradient(180deg,transparent 1px,transparent 11px,#242933 0,#242933 15px,transparent 0,transparent 26px);background-size:100% 26px;color:var(--color-typographic-base-font);height:26px;margin:52px auto;width:100px}a{color:var(--color-typographic-link-p-font);text-decoration:none}a:active,a:focus,a:hover{color:var(--color-typographic-link-s-font)}b,strong{font-weight:600}ul{list-style:square;margin-bottom:26px}ul li{margin-bottom:10px;padding:0 5px}p{line-height:26px;margin-bottom:26px}blockquote{font-style:italic;padding:0;text-align:center}figure{display:block;height:auto;width:100%}figcaption{color:var(--color-typographic-base-font);font-size:14px;font-style:italic;line-height:19.5px;margin-bottom:0;margin-top:6.5px;text-align:center}@media screen and (min-width:685px){figure.float-left,figure.float-right{max-width:310px;padding:0 26px}.float-right{float:right}.float-left{float:left}}code[class*=language-],pre[class*=language-]{word-wrap:normal;color:#657b83;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;-webkit-hyphens:none;hyphens:none;line-height:1.5;tab-size:4;text-align:left;white-space:pre;word-break:normal;word-spacing:normal}pre[class*=language-]{border-radius:.3em;margin:.5em 0;overflow:auto;padding:1em}:not(pre)>code[class*=language-],pre[class*=language-]{background-color:var(--color-prism-background)}:not(pre)>code[class*=language-]{border-radius:.3em;padding:.1em}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{background:#073642}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#93a1a1}.token.punctuation{color:#586e75}.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol,.token.tag{color:#268bd2}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string,.token.url{color:#2aa198}.token.entity{background:#eee8d5;color:#657b83;cursor:help}.token.atrule,.token.attr-value,.token.keyword{color:#859900}.token.class-name,.token.function{color:#b58900}.token.important,.token.regex,.token.variable{color:#cb4b16}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.Feed-module--feed--a6204 .Feed-module--item--c7a63{margin-bottom:32.5px}.Feed-module--feed--a6204 .Feed-module--item--c7a63:last-child{margin-bottom:13px}.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--title--f252f{font-size:27px;line-height:39px;margin-bottom:13px;margin-top:0}.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--title--f252f .Feed-module--link--6123b{color:var(--color-typographic-base-font)}.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--title--f252f .Feed-module--link--6123b:focus,.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--title--f252f .Feed-module--link--6123b:hover{border-bottom:1px solid #242933;color:var(--color-typographic-base-font)}.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--description--57348{font-size:16px;line-height:26px;margin-bottom:19.5px}.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--meta--250c2 .Feed-module--time--72864{color:var(--color-typographic-base-font);font-size:14px;font-weight:600;text-transform:uppercase}.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--meta--250c2 .Feed-module--divider--81a18{margin:0 13px}.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--meta--250c2 .Feed-module--category--59f58 .Feed-module--link--6123b{color:var(--color-secondary);font-size:14px;font-weight:600;text-transform:uppercase}.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--meta--250c2 .Feed-module--category--59f58 .Feed-module--link--6123b:focus,.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--meta--250c2 .Feed-module--category--59f58 .Feed-module--link--6123b:hover{color:#5c92ff}.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--more--51a4e{color:var(--color-primary);font-size:16px}.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--more--51a4e:focus,.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--more--51a4e:hover{border-bottom:1px solid #5c92ff;color:var(--color-primary)}.Layout-module--layout--2c933{margin-left:auto;margin-right:auto;max-width:1070px}.Layout-module--layout--2c933:before{content:"";display:table}.Layout-module--layout--2c933:after{clear:both;content:"";display:table}.Page-module--page--24e03{margin-bottom:52px}.Page-module--page--24e03 .Page-module--inner--4b31d{padding:26px 19.5px 0}.Page-module--page--24e03 .Page-module--title--90338{font-size:40px;font-weight:600;line-height:52px;margin-bottom:37.7px;margin-top:0}.Page-module--page--24e03 .Page-module--body--561c4{font-size:16px;line-height:26px;margin:0 0 26px}@media screen and (min-width:685px){.Page-module--page--24e03{width:calc(58.275% - 12.5px)}.Page-module--page--24e03:nth-child(1n){clear:none;float:left;margin-right:30px}.Page-module--page--24e03:last-child{margin-right:0}.Page-module--page--24e03:nth-child(12n){float:right;margin-right:0}.Page-module--page--24e03:nth-child(12n+1){clear:both}.Page-module--page--24e03 .Page-module--inner--4b31d{padding:32.5px 19.5px 0}}@media screen and (min-width:960px){.Page-module--page--24e03{width:calc(66.6% - 10px)}.Page-module--page--24e03:nth-child(1n){clear:none;float:left;margin-right:30px}.Page-module--page--24e03:last-child{margin-right:0}.Page-module--page--24e03:nth-child(3n){float:right;margin-right:0}.Page-module--page--24e03:nth-child(3n+1){clear:both}.Page-module--page--24e03 .Page-module--inner--4b31d{padding:39px 26px 0}}.Pagination-module--pagination--d61cb{display:flex;margin-top:52px}.Pagination-module--pagination--d61cb .Pagination-module--previous--4a76b{text-align:left;width:50%}.Pagination-module--pagination--d61cb .Pagination-module--previous--4a76b .Pagination-module--previousLink--5590d{color:var(--color-secondary);font-size:26px;font-weight:700}.Pagination-module--pagination--d61cb .Pagination-module--previous--4a76b .Pagination-module--previousLink--5590d:focus,.Pagination-module--pagination--d61cb .Pagination-module--previous--4a76b .Pagination-module--previousLink--5590d:hover{color:var(--color-primary)}.Pagination-module--pagination--d61cb .Pagination-module--previous--4a76b .Pagination-module--previousLink--5590d.Pagination-module--disable--7e105{color:#3f485a;pointer-events:none}.Pagination-module--pagination--d61cb .Pagination-module--next--1cab8{text-align:right;width:50%}.Pagination-module--pagination--d61cb .Pagination-module--next--1cab8 .Pagination-module--nextLink--532ff{color:var(--color-secondary);font-size:26px;font-weight:700}.Pagination-module--pagination--d61cb .Pagination-module--next--1cab8 .Pagination-module--nextLink--532ff:focus,.Pagination-module--pagination--d61cb .Pagination-module--next--1cab8 .Pagination-module--nextLink--532ff:hover{color:var(--color-primary)}.Pagination-module--pagination--d61cb .Pagination-module--next--1cab8 .Pagination-module--nextLink--532ff.Pagination-module--disable--7e105{color:#3f485a;pointer-events:none}.Button-module--button--b1113{border:1px solid var(--color-button-border);border-radius:20px;color:var(--color-button-color);display:inline-block;font-size:16px;font-weight:400;height:40px;line-height:40px;margin-left:auto;margin-right:auto;padding:0 26px;text-align:center;text-decoration:none}.Button-module--button--b1113:focus,.Button-module--button--b1113:hover{color:#5c92ff}.ThemeSwitcher-module--themeSwitcher--8a77f{--color:var(--color-theme-switcher)}.ThemeSwitcher-module--themeSwitcher--8a77f .ThemeSwitcher-module--button--7cb7b{align-items:center;background:transparent;border:0;cursor:pointer;display:flex;justify-content:center;outline:0}.ThemeSwitcher-module--themeSwitcher--8a77f .ThemeSwitcher-module--button--7cb7b svg{stroke:var(--color);pointer-events:none;transition:stroke .4s}.ThemeSwitcher-module--themeSwitcher--8a77f .ThemeSwitcher-module--button--7cb7b:hover{--color:var(--color-theme-switcher-hover)}.ThemeSwitcher-module--themeSwitcher--8a77f .ThemeSwitcher-module--moon--10537{stroke-dasharray:0 1px;opacity:0;transition:stroke-dasharray .2s ease-in,opacity .4s ease-in}.ThemeSwitcher-module--themeSwitcher--8a77f .ThemeSwitcher-module--sun--2163a{stroke-dasharray:1px 1px;opacity:1;transition:stroke-dasharray .2s ease-in,opacity .4s ease-in}.ThemeSwitcher-module--themeSwitcher--8a77f.ThemeSwitcher-module--dark--6db0c .ThemeSwitcher-module--moon--10537{stroke-dasharray:1px 1px;opacity:1}.ThemeSwitcher-module--themeSwitcher--8a77f.ThemeSwitcher-module--dark--6db0c .ThemeSwitcher-module--sun--2163a{stroke-dasharray:0 1px;opacity:0}.Author-module--author--cbd31 .Author-module--photo--9787b{background-clip:padding-box;border-radius:50%;display:inline-block;height:75px;margin-bottom:0;width:75px}.Author-module--author--cbd31 .Author-module--photo--9787b img{border-radius:50%}.Author-module--author--cbd31 .Author-module--title--cf7e5{font-size:18px;font-weight:600;line-height:29.25px;margin:0}.Author-module--author--cbd31 .Author-module--title--cf7e5 .Author-module--link--09c17,.Author-module--author--cbd31 .Author-module--title--cf7e5 .Author-module--link--09c17:focus,.Author-module--author--cbd31 .Author-module--title--cf7e5 .Author-module--link--09c17:hover{color:var(--color-typographic-base-font)}.Author-module--author--cbd31 .Author-module--subtitle--86ec5{color:#7f8ba4;line-height:26px;margin-bottom:26px}.Author-module--author--cbd31 .Author-module--titleContainer--4f576{align-items:center;display:flex;justify-content:space-between;margin:13px 0}.Icon-module--icon--1d7da{fill:currentcolor;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;speak:none;stroke:currentcolor;stroke-width:0;display:inline-block;font-style:normal;font-variant:normal;font-weight:400;height:1em;line-height:1em;text-align:center;text-transform:none;width:1em}.Contacts-module--contacts--09178{margin-bottom:26px}.Contacts-module--contacts--09178 .Contacts-module--list--9670b{display:flex;flex-flow:row wrap;flex-grow:0;flex-shrink:0;list-style:none;margin:13px 0;max-width:165px;padding:0}.Contacts-module--contacts--09178 .Contacts-module--list--9670b .Contacts-module--item--f9cb0{align-content:center;align-items:center;border:1px solid var(--color-contacts-border);border-radius:50%;display:flex;height:40px;justify-content:center;line-height:40px;margin:6.5px;padding:0;text-align:center;width:40px}.Contacts-module--contacts--09178 .Contacts-module--list--9670b .Contacts-module--item--f9cb0:nth-child(3n+1){margin-left:0}.Contacts-module--contacts--09178 .Contacts-module--list--9670b .Contacts-module--item--f9cb0 .Contacts-module--link--de1e0{border:0;color:var(--color-typographic-base-font);cursor:pointer;display:flex}.Contacts-module--contacts--09178 .Contacts-module--list--9670b .Contacts-module--item--f9cb0 .Contacts-module--link--de1e0:focus,.Contacts-module--contacts--09178 .Contacts-module--list--9670b .Contacts-module--item--f9cb0 .Contacts-module--link--de1e0:hover{color:var(--color-typographic-link-p-font)}.Copyright-module--copyright--2c602{color:#7f8ba4;font-size:14px}.Menu-module--menu--113a9{margin-bottom:26px}.Menu-module--menu--113a9 .Menu-module--list--e1ae3{list-style:none;margin:0;padding:0}.Menu-module--menu--113a9 .Menu-module--list--e1ae3 .Menu-module--item--8b679{margin:13px 0;padding:0}.Menu-module--menu--113a9 .Menu-module--list--e1ae3 .Menu-module--item--8b679 .Menu-module--link--a6f02{border:0;color:var(--color-typographic-base-font);font-size:16px;font-weight:400}.Menu-module--menu--113a9 .Menu-module--list--e1ae3 .Menu-module--item--8b679 .Menu-module--link--a6f02:focus,.Menu-module--menu--113a9 .Menu-module--list--e1ae3 .Menu-module--item--8b679 .Menu-module--link--a6f02:hover{border-bottom:1px solid #5c92ff;color:#5c92ff}.Menu-module--menu--113a9 .Menu-module--list--e1ae3 .Menu-module--item--8b679 .Menu-module--link--a6f02.Menu-module--active--6cb74{border-bottom:1px solid var(--color-typographic-base-font);color:var(--color-typographic-base-font)}.Sidebar-module--sidebar--1bfa1{width:100%}.Sidebar-module--sidebar--1bfa1 .Sidebar-module--inner--344d0{padding:26px 19.5px 0;position:relative}.Sidebar-module--sidebar--1bfa1 .Sidebar-module--inner--344d0:after{background:var(--color-sidebar-border);background:linear-gradient(to bottom,var(--color-sidebar-border) 0,var(--color-sidebar-border) 48%,var(--color-sidebar-border-fade) 100%)}@media screen and (min-width:685px){.Sidebar-module--sidebar--1bfa1{width:calc(41.625% - 17.5px)}.Sidebar-module--sidebar--1bfa1:nth-child(1n){clear:none;float:left;margin-right:30px}.Sidebar-module--sidebar--1bfa1:last-child{margin-right:0}.Sidebar-module--sidebar--1bfa1:nth-child(12n){float:right;margin-right:0}.Sidebar-module--sidebar--1bfa1:nth-child(12n+1){clear:both}.Sidebar-module--sidebar--1bfa1 .Sidebar-module--inner--344d0{padding:32.5px 19.5px 0}.Sidebar-module--sidebar--1bfa1 .Sidebar-module--inner--344d0:after{bottom:0;content:"";height:540px;position:absolute;right:-10px;top:30px;width:1px}}@media screen and (min-width:960px){.Sidebar-module--sidebar--1bfa1{width:calc(33.3% - 20px)}.Sidebar-module--sidebar--1bfa1:nth-child(1n){clear:none;float:left;margin-right:30px}.Sidebar-module--sidebar--1bfa1:last-child{margin-right:0}.Sidebar-module--sidebar--1bfa1:nth-child(3n){float:right;margin-right:0}.Sidebar-module--sidebar--1bfa1:nth-child(3n+1){clear:both}.Sidebar-module--sidebar--1bfa1 .Sidebar-module--inner--344d0{padding:39px}}.Author-module--author--1c58d{border-top:1px solid var(--color-page-border);line-height:26px;margin-bottom:52px;margin-top:26px;max-width:640px;padding-top:26px}.Author-module--author--1c58d .Author-module--bio--08950 .Author-module--twitter--90647{display:block;text-decoration:underline}.Author-module--author--1c58d .Author-module--bio--08950 .Author-module--twitter--90647:focus,.Author-module--author--1c58d .Author-module--bio--08950 .Author-module--twitter--90647:hover{color:var(--color-typographic-link-s-font)}@media screen and (min-width:685px){.Author-module--author--1c58d{margin-left:auto;margin-right:auto}}.Content-module--content--80d58{margin:0 auto;max-width:945px;padding:0 13px}.Content-module--content--80d58 .Content-module--title--09504{font-size:32px;font-weight:600;line-height:42.9px;margin:26px auto 0;max-width:640px;text-align:center}.Content-module--content--80d58 .Content-module--body--726c2 figure{margin-bottom:26px}.Content-module--content--80d58 .Content-module--body--726c2 figure blockquote{font-style:italic;margin-top:0;padding:26px 0;text-align:center}.Content-module--content--80d58 .Content-module--body--726c2 figure blockquote p{font-size:26.9072px;line-height:39px;margin-bottom:26px;margin-top:0;max-width:640px}.Content-module--content--80d58 .Content-module--body--726c2 a{text-decoration:underline}.Content-module--content--80d58 .Content-module--body--726c2 *{margin-left:auto;margin-right:auto;max-width:640px}.Content-module--content--80d58 .Content-module--body--726c2 h2>a{visibility:hidden}.Content-module--content--80d58 .Content-module--body--726c2 h2>a>svg{fill:var(--color-typographic-base-font)}.Content-module--content--80d58 .Content-module--body--726c2 img{max-width:100%}@media screen and (min-width:960px){.Content-module--content--80d58{padding:0}.Content-module--content--80d58 .Content-module--title--09504{font-size:48px;line-height:58.5px;margin-bottom:39px;margin-top:58.5px}.Content-module--content--80d58 .Content-module--body--726c2,.Content-module--content--80d58 .Content-module--body--726c2 p{font-size:18px;line-height:29.25px;margin-bottom:29.25px}.Content-module--content--80d58 .Content-module--body--726c2 h2>a{padding-right:13px;visibility:unset}}.Meta-module--meta--dae0a .Meta-module--date--4d30d{font-style:italic}.Tags-module--tags--18589{margin-bottom:13px}.Tags-module--tags--18589 .Tags-module--list--82ae6{list-style:none;padding:0}.Tags-module--tags--18589 .Tags-module--list--82ae6 .Tags-module--item--52015{display:inline-block;margin:6.5px 0}@media screen and (min-width:685px){.Tags-module--tags--18589 .Tags-module--list--82ae6 .Tags-module--item--52015:first-child{margin-left:0;padding-left:0}}.Post-module--post--3a994 .Post-module--content--3c6e5{margin:0 auto}.Post-module--post--3a994 .Post-module--comments--d3b99,.Post-module--post--3a994 .Post-module--footer--f8705{margin:0 auto;max-width:640px;padding:0 13px}.Post-module--post--3a994 .Post-module--buttons--2972d{align-items:center;display:flex;justify-content:center;margin:26px 0 0;text-align:center}.Post-module--post--3a994 .Post-module--buttons--2972d .Post-module--buttonArticles--d793a{margin:0 13px 0 0}@media screen and (min-width:960px){.Post-module--post--3a994 .Post-module--comments--d3b99,.Post-module--post--3a994 .Post-module--footer--f8705{padding:0}.Post-module--post--3a994 .Post-module--buttons--2972d{left:30px;margin:0 13px 0 0;max-width:none;position:fixed;top:30px}}</style><title data-gatsby-head="true">Node, Ngnix 설정하기 - Kykim.dev</title><link rel="alternate" type="application/rss+xml" title="Kykim.dev" href="/rss.xml"/><style type="text/css">
+    .anchor.before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateX(-100%);
+      padding-right: 4px;
+    }
+    .anchor.after {
+      display: inline-block;
+      padding-left: 4px;
+    }
+    h1 .anchor svg,
+    h2 .anchor svg,
+    h3 .anchor svg,
+    h4 .anchor svg,
+    h5 .anchor svg,
+    h6 .anchor svg {
+      visibility: hidden;
+    }
+    h1:hover .anchor svg,
+    h2:hover .anchor svg,
+    h3:hover .anchor svg,
+    h4:hover .anchor svg,
+    h5:hover .anchor svg,
+    h6:hover .anchor svg,
+    h1 .anchor:focus svg,
+    h2 .anchor:focus svg,
+    h3 .anchor:focus svg,
+    h4 .anchor:focus svg,
+    h5 .anchor:focus svg,
+    h6 .anchor:focus svg {
+      visibility: visible;
+    }
+  </style><script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      var hash = window.decodeURI(location.hash.replace('#', ''))
+      if (hash !== '') {
+        var element = document.getElementById(hash)
+        if (element) {
+          var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+          var clientTop = document.documentElement.clientTop || document.body.clientTop || 0
+          var offset = element.getBoundingClientRect().top + scrollTop - clientTop
+          // Wait for the browser to finish rendering before scrolling.
+          setTimeout((function() {
+            window.scrollTo(0, offset - 0)
+          }), 0)
+        }
+      }
+    })
+  </script><link rel="preconnect" href="https://www.googletagmanager.com"/><link rel="dns-prefetch" href="https://www.googletagmanager.com"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-73379983-2"></script><script>
+      
+      
+      if(true) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){window.dataLayer && window.dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-73379983-2', {"send_page_view":false});
+      }
+      </script><link rel="sitemap" type="application/xml" href="/sitemap/sitemap-index.xml"/><link rel="icon" href="/favicon-32x32.png?v=8a262f5ad3970ad9fe18a6532955f993" type="image/png"/><link rel="manifest" href="/manifest.webmanifest" crossorigin="anonymous"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=8a262f5ad3970ad9fe18a6532955f993"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=8a262f5ad3970ad9fe18a6532955f993"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=8a262f5ad3970ad9fe18a6532955f993"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=8a262f5ad3970ad9fe18a6532955f993"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=8a262f5ad3970ad9fe18a6532955f993"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=8a262f5ad3970ad9fe18a6532955f993"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=8a262f5ad3970ad9fe18a6532955f993"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=8a262f5ad3970ad9fe18a6532955f993"/><style>.gatsby-image-wrapper{position:relative;overflow:hidden}.gatsby-image-wrapper picture.object-fit-polyfill{position:static!important}.gatsby-image-wrapper img{bottom:0;height:100%;left:0;margin:0;max-width:none;padding:0;position:absolute;right:0;top:0;width:100%;object-fit:cover}.gatsby-image-wrapper [data-main-image]{opacity:0;transform:translateZ(0);transition:opacity .25s linear;will-change:opacity}.gatsby-image-wrapper-constrained{display:inline-block;vertical-align:top}</style><noscript><style>.gatsby-image-wrapper noscript [data-main-image]{opacity:1!important}.gatsby-image-wrapper [data-placeholder-image]{opacity:0!important}</style></noscript><script type="module">const e="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;e&&document.body.addEventListener("load",(function(e){const t=e.target;if(void 0===t.dataset.mainImage)return;if(void 0===t.dataset.gatsbyImageSsr)return;let a=null,n=t;for(;null===a&&n;)void 0!==n.parentNode.dataset.gatsbyImageWrapper&&(a=n.parentNode),n=n.parentNode;const o=a.querySelector("[data-placeholder-image]"),r=new Image;r.src=t.currentSrc,r.decode().catch((()=>{})).then((()=>{t.style.opacity=1,o&&(o.style.opacity=0,o.style.transition="opacity 500ms linear")}))}),!0);</script></head><body><script>
+          void function() {
+            var cachedMode;
+
+            try {
+              var preferredTheme = JSON.parse(localStorage.getItem('diesel:theme-atom'));
+
+              if (preferredTheme && preferredTheme.mode) {
+                cachedMode = preferredTheme.mode;
+              }
+            } catch (err) { }
+
+            function setTheme(newTheme) {
+              document.documentElement.className = newTheme;
+            }
+
+            var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+            setTheme(cachedMode || (darkQuery.matches ? 'dark' : 'light'));
+          }()
+        </script><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="Layout-module--layout--2c933"><div class="Post-module--post--3a994"><div class="Post-module--buttons--2972d"><a class="Button-module--button--b1113 Post-module--buttonArticles--d793a" href="/">All Articles</a></div><div class="Post-module--content--3c6e5"><div class="Content-module--content--80d58"><h1 class="Content-module--title--09504">Node, Ngnix 설정하기</h1><div class="Content-module--body--726c2"><h2 id="node" style="position:relative;"><a href="#node" aria-label="node permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Node</h2>
+<p>자바스크립트 프로그램을 실행할 수 있는 환경</p>
+<h2 id="nodejs" style="position:relative;"><a href="#nodejs" aria-label="nodejs permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Node.js</h2>
+<blockquote>
+<p>“node.js는 Chrome v8 javascript 엔진으로 빌드된 javascript 런타임이다.”</p>
+</blockquote>
+<ul>
+<li>기존에는 자바스크립트 프로그램을 웹 브라우저 위에서만 실행할 수 있었는데, 구글이 다른 엔진과 달리 매우 빠르고 오픈소스로 공개한 v8 엔진을 사용하여 크롬을 출시하면서 v8 엔진 기반의 노드 프로젝트가 시작되었음</li>
+<li>노드는 v8(자바스크립트 엔진)과 liubuv(비동기 I/O)라는 라이브러리를 사용하고 C와 C++로 구현</li>
+</ul>
+<blockquote>
+<p>”<strong>Node.js는 자바스크립트 프로그램이 서버로서 기능하기 위한 도구를 제공하고, 자바스크립트 프로그램이 동작하는 환경</strong>” 을 의미한다.</p>
+</blockquote>
+<h2 id="서버에-node-설치하기" style="position:relative;"><a href="#%EC%84%9C%EB%B2%84%EC%97%90-node-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0" aria-label="서버에 node 설치하기 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>서버에 Node 설치하기</h2>
+<ol>
+<li>서버 접속</li>
+<li>node 버전 관리 : nvm(Node version Manager) 설치</li>
+</ol>
+<ul>
+<li><a href="https://github.com/nvm-sh/nvm" target="_blank" rel="nofollow noopener noreferrer">nvm</a>은 node js 버전 매니저로 시스템에 여러 개의 nodejs 를 설치하고 사용할 버전을 쉽게 전환할 수록 도와주는 shell script로 <a href="https://rvm.io/" target="_blank" rel="nofollow noopener noreferrer">rvm(Ruby Version Manager)</a>와 비슷한 역할을 수행함</li>
+</ul>
+<ol>
+<li>cURL 설치</li>
+</ol>
+<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c"> curl <span class="token operator">-</span>o<span class="token operator">-</span> <span class="token operator">&lt;</span>https<span class="token operator">:</span><span class="token comment">//raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh> | bash</span></code></pre></div>
+<ol start="2">
+<li>Wget 설치</li>
+</ol>
+<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c">wget <span class="token operator">-</span>qO<span class="token operator">-</span> <span class="token operator">&lt;</span>https<span class="token operator">:</span><span class="token comment">//raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh> | bash</span></code></pre></div>
+<ol start="3">
+<li>패키지 관리 : npm 설치</li>
+</ol>
+<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span> <span class="token directive keyword">rpm</span> <span class="token expression"><span class="token operator">-</span>Uvh <span class="token operator">&lt;</span>http<span class="token operator">:</span></span><span class="token comment">//dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span> <span class="token directive keyword">yum</span> <span class="token expression"><span class="token operator">-</span>y install npm</span></span></code></pre></div>
+<ol start="4">
+<li>node.js 설치</li>
+</ol>
+<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span> <span class="token directive keyword">nvm</span> <span class="token expression">install nodejs or <span class="token punctuation">[</span>node 버전 입력<span class="token punctuation">]</span></span></span></code></pre></div>
+<h2 id="ngnix" style="position:relative;"><a href="#ngnix" aria-label="ngnix permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ngnix</h2>
+<p><strong>웹 서버 소프트웨어</strong>로, 가벼움과 높은 성능을 목표로 한다.</p>
+<h3 id="웹-서버" style="position:relative;"><a href="#%EC%9B%B9-%EC%84%9C%EB%B2%84" aria-label="웹 서버 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>웹 서버</h3>
+<ul>
+<li>
+<p>이미지, 동영상, 자바스크립트, HTML 등 다양한 문서를 제공하는 서버 시스템</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 960px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/01cb36d9228743e801c2d44463088b96/bd9eb/image1.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 25%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAABYlAAAWJQFJUiTwAAABI0lEQVQY022QPUvDUBSGMzr5N1z9GwpuXTqqm4v+BjfBSUcXJxcXV61iq+AodShJE7UkIR8mtbW5SROTGx7JrXQQD7ycwwvnnJdHq4Vg6th4lkkRRzSVBW8Yp7sMjlqEvQvlfRcFQgjSNF1KSsnf0hCCwPPQLYtiMlbmZ/+GXmuFuw0N/WRHeXmWEQYBYRgqRVGErCSyrkiKCaKYUteyOZjiOw66YZCPY5qfcf+Wp4N1HvfWGJ7tUwNpKjBNE8MwlGzbpiprYuHT0S/pWldkpUBjPmeo63S6XfLfhOPnax7aq9xvNQm3FxhSgeM4uK6rehAElGVFIXPcySve17tKq9WzGcJ1GY9GlNHHYtk3GRy3eTncxL87XzJMkkRxbNTM/zH8ATztaV9ecLF7AAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/01cb36d9228743e801c2d44463088b96/8ac56/image1.webp 240w,
+/static/01cb36d9228743e801c2d44463088b96/d3be9/image1.webp 480w,
+/static/01cb36d9228743e801c2d44463088b96/e46b2/image1.webp 960w,
+/static/01cb36d9228743e801c2d44463088b96/f992d/image1.webp 1440w,
+/static/01cb36d9228743e801c2d44463088b96/daf4e/image1.webp 1442w"
+              sizes="(max-width: 960px) 100vw, 960px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/01cb36d9228743e801c2d44463088b96/8ff5a/image1.png 240w,
+/static/01cb36d9228743e801c2d44463088b96/e85cb/image1.png 480w,
+/static/01cb36d9228743e801c2d44463088b96/d9199/image1.png 960w,
+/static/01cb36d9228743e801c2d44463088b96/07a9c/image1.png 1440w,
+/static/01cb36d9228743e801c2d44463088b96/bd9eb/image1.png 1442w"
+            sizes="(max-width: 960px) 100vw, 960px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/01cb36d9228743e801c2d44463088b96/d9199/image1.png"
+            alt="image1.png"
+            title="image1.png"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+</li>
+<li>
+<p>웹 서버의 역할</p>
+<ol>
+<li>데이터 전송</li>
+</ol>
+<ul>
+<li>HTML 텍스트 파일을 비롯 이미지나 음성 데이터 같은 정적 컨텐츠를 웹 클라이언트에 전송
+⇒ CSR에 의해 생성된 빌드 파일(정적 파일)을 제공할 수 있음</li>
+</ul>
+<ol start="2">
+<li>어플리케이션 실행</li>
+</ol>
+<ul>
+<li>웹 서버 내 PHP와 같은 모듈을 내장해 웹 서버가 직접 Application Server를 실행할 수 있음. 이를 통해 이미지 압축 등 기능을 사용할 수 있음</li>
+</ul>
+<ol start="3">
+<li>프록시 처리</li>
+</ol>
+<ul>
+<li>클라이언트의 요청을 Application Server로 전달하는 역할</li>
+<li>캐시 처리, 로드 밸런싱, 리버스 프록시 서버, 암호화 등을 처리할 수 있으며 웹 서버가 사용되는 가장 큰 이유 중 하나</li>
+<li>리버스 프록시 : 컴퓨터 네트워크에서 클라이언트를 대신해 한 대 이상의 서버로부터 자원을 추출하는 프록시 서버의 일종. 웹 서버 자체에서 기원한 것처럼 해당 클라이언트로 반환.</li>
+</ul>
+</li>
+</ul>
+<h3 id="ngnix-특징" style="position:relative;"><a href="#ngnix-%ED%8A%B9%EC%A7%95" aria-label="ngnix 특징 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ngnix 특징</h3>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 960px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/5247129c4f1e96e259258b8bcbdcd15c/0d292/image2.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 23.75%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAABYlAAAWJQFJUiTwAAAA6ElEQVQY002PDY+CMBBE/f8/8QKVj7ZCCwKtCgXadxHv1Ekmk+xs3mZPewjYnwxXK7pc4KWmy3K8VHSZIG0biZcmfWGs6sNDVTHVkuu5IK7r0aeUOKV9x3Udq3P4vn/n5v2RxPgGzrcb93Fido7Zex7OcZ8mUowf4BICslIY06F1Q98PaHWhbS1aacLf9Zgirr9ia8XQtIzGYpXm2rSsIXyAj3mmLCWZKBCiQDeGsyjJRUFdax7L8gLGyOBvdKOjVBdKqTH9QD96lvD1Ml8y1pCLHGPt9/hYfPqpbduQSlIUZ7z37/4f+Avuc38Onaw/TwAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/5247129c4f1e96e259258b8bcbdcd15c/8ac56/image2.webp 240w,
+/static/5247129c4f1e96e259258b8bcbdcd15c/d3be9/image2.webp 480w,
+/static/5247129c4f1e96e259258b8bcbdcd15c/e46b2/image2.webp 960w,
+/static/5247129c4f1e96e259258b8bcbdcd15c/f992d/image2.webp 1440w,
+/static/5247129c4f1e96e259258b8bcbdcd15c/7509d/image2.webp 1620w"
+              sizes="(max-width: 960px) 100vw, 960px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/5247129c4f1e96e259258b8bcbdcd15c/8ff5a/image2.png 240w,
+/static/5247129c4f1e96e259258b8bcbdcd15c/e85cb/image2.png 480w,
+/static/5247129c4f1e96e259258b8bcbdcd15c/d9199/image2.png 960w,
+/static/5247129c4f1e96e259258b8bcbdcd15c/07a9c/image2.png 1440w,
+/static/5247129c4f1e96e259258b8bcbdcd15c/0d292/image2.png 1620w"
+            sizes="(max-width: 960px) 100vw, 960px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/5247129c4f1e96e259258b8bcbdcd15c/d9199/image2.png"
+            alt="image2.png"
+            title="image2.png"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<ul>
+<li>비동기 event driven에 의한 non blocking 처리</li>
+<li>동시 접속수가 늘어날 수록 물리 메모리가 증가하는 프로세스 기반 apache 서버에 비해 소비 메모리량이 적어지면서 동시 처리수를 급격하게 늘릴 수 있음</li>
+<li>single thread 기반으로 마스터 / worker 프로세스 구동 방식을 채택하여 context switcing을 하지 않기 때문에 CPU 사용률을 감소시킬 수 있음</li>
+<li>여러 기능을 모듈 단위로 개발하여 nginx를 컴파일할 때 필요한 모듈들만 조합해서 사용할 수 있음</li>
+</ul>
+<h3 id="설치" style="position:relative;"><a href="#%EC%84%A4%EC%B9%98" aria-label="설치 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>설치</h3>
+<ul>
+<li>yum 유틸리티 설치</li>
+</ul>
+<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c"><span class="token operator">~</span># yum install yum<span class="token operator">-</span>utils</code></pre></div>
+<ul>
+<li>ngnix 저장소 추가</li>
+</ul>
+<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c">vi <span class="token operator">/</span>etc<span class="token operator">/</span>yum<span class="token punctuation">.</span>repos<span class="token punctuation">.</span>d<span class="token operator">/</span>nginx<span class="token punctuation">.</span>repo</code></pre></div>
+<ul>
+<li>nginx.repo 파일 설정
+<ul>
+<li>name : 유저 이름baseurl : 데이터를 호출하기 위한 외부 저장소 urlgpgcheck : 프로그램 서명 여부 체크 (활성화 1, 비활성화 0)enabled : yum repo 추가 여부 (1, 0)</li>
+</ul>
+</li>
+</ul>
+<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c"><span class="token punctuation">[</span>nginx<span class="token punctuation">]</span>
+name<span class="token operator">=</span>nginx repo
+baseurl<span class="token operator">=</span>http<span class="token operator">:</span><span class="token comment">//nginx.org/packages/centos/7/$basearch/</span>
+gpgcheck<span class="token operator">=</span><span class="token number">0</span>
+enabled<span class="token operator">=</span><span class="token number">1</span></code></pre></div>
+<ul>
+<li>ngnix 설치</li>
+</ul>
+<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c">yum install <span class="token operator">-</span>y nginx</code></pre></div>
+<h3 id="config-설정" style="position:relative;"><a href="#config-%EC%84%A4%EC%A0%95" aria-label="config 설정 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>config 설정</h3>
+<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c">vi <span class="token operator">/</span>etc<span class="token operator">/</span>nginx<span class="token operator">/</span>conf<span class="token punctuation">.</span>d<span class="token operator">/</span><span class="token keyword">default</span><span class="token punctuation">.</span>conf</code></pre></div>
+<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c">server <span class="token punctuation">{</span>
+    listen       <span class="token number">53001</span><span class="token punctuation">;</span>
+    <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">listen</span>       <span class="token expression"><span class="token punctuation">[</span><span class="token operator">::</span><span class="token punctuation">]</span><span class="token operator">:</span><span class="token number">8080</span><span class="token punctuation">;</span></span></span>
+
+    <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">server</span><span class="token expression">_name  localhost<span class="token punctuation">;</span> # 도메인 주소 넣는부분</span></span>
+
+    root <span class="token operator">/</span>usr<span class="token operator">/</span>dist<span class="token operator">/</span><span class="token punctuation">;</span> # 배포할 프로젝트 dist 경로
+    index index<span class="token punctuation">.</span>html index<span class="token punctuation">.</span>htm<span class="token punctuation">;</span>
+
+    client_max_body_size <span class="token number">100</span>M<span class="token punctuation">;</span>
+
+    location <span class="token operator">/</span> <span class="token punctuation">{</span>
+        root <span class="token operator">/</span>usr<span class="token operator">/</span>dist<span class="token punctuation">;</span>
+        index index<span class="token punctuation">.</span>html<span class="token punctuation">;</span>
+        try_files $uri $uri<span class="token operator">/</span> <span class="token operator">/</span>index<span class="token punctuation">.</span>html<span class="token punctuation">;</span> #경로 탐색
+    <span class="token punctuation">}</span>
+
+    location <span class="token operator">/</span>graphql <span class="token punctuation">{</span>
+        proxy_pass http<span class="token operator">:</span><span class="token comment">//주소:54001/graphql;</span>
+    <span class="token punctuation">}</span>
+
+    error_page <span class="token number">404</span> <span class="token operator">/</span><span class="token number">404.</span>html<span class="token punctuation">;</span>
+        location <span class="token operator">=</span> <span class="token operator">/</span><span class="token number">40</span>x<span class="token punctuation">.</span>html <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+
+    error_page <span class="token number">500</span> <span class="token number">502</span> <span class="token number">503</span> <span class="token number">504</span> <span class="token operator">/</span><span class="token number">50</span>x<span class="token punctuation">.</span>html<span class="token punctuation">;</span>
+        location <span class="token operator">=</span> <span class="token operator">/</span><span class="token number">50</span>x<span class="token punctuation">.</span>html <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<ul>
+<li>ngnix.conf 설정
+<ul>
+<li>메인 configuration으로 여기에서 default.conf 호출</li>
+</ul>
+</li>
+</ul>
+<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c">vi <span class="token operator">/</span>etc<span class="token operator">/</span>nginx<span class="token operator">/</span>nginx<span class="token punctuation">.</span>conf</code></pre></div>
+<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c">worker_processes  <span class="token number">1</span><span class="token punctuation">;</span> ## master process 내부 worker process 수
+events <span class="token punctuation">{</span> ## 네트워크 동작방법 설정
+    worker_connections  <span class="token number">1024</span><span class="token punctuation">;</span> ## 하나의 work process는 설정한 수만큼 연결 가능
+<span class="token punctuation">}</span>
+http <span class="token punctuation">{</span>
+    include       mime<span class="token punctuation">.</span>types<span class="token punctuation">;</span>
+    server <span class="token punctuation">{</span>
+        listen       <span class="token number">80</span><span class="token punctuation">;</span>
+        location <span class="token operator">/</span> <span class="token punctuation">{</span>
+            root   html<span class="token punctuation">;</span>
+            index  index<span class="token punctuation">.</span>html index<span class="token punctuation">.</span>htm<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<ul>
+<li>설정 예시</li>
+</ul>
+<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c">user  nginx<span class="token punctuation">;</span>         ## NGINX 프로세스가 실행되는 권한<span class="token punctuation">,</span> root 권한은 보안상 위험함
+worker_processes  <span class="token number">2</span><span class="token punctuation">;</span> ## Default<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> CPU 코어 하나에 최소한 한 개의 프로세스가 배정되도록 변경 권장
+worker_priority   <span class="token number">0</span><span class="token punctuation">;</span> ## 값이 작을 수록 높은 우선순위를 갖는다<span class="token punctuation">.</span> 커널 프로세스의 기본 우선순위인 <span class="token operator">-</span><span class="token number">5</span> 이하로는 설정하지 않도록 한다<span class="token punctuation">.</span>
+
+# 로그레벨 <span class="token punctuation">[</span> debug <span class="token operator">|</span> info <span class="token operator">|</span> notice <span class="token operator">|</span> warn <span class="token operator">|</span> error <span class="token operator">|</span> crit <span class="token punctuation">]</span>
+error_log  <span class="token operator">/</span>var<span class="token operator">/</span>log<span class="token operator">/</span>nginx<span class="token operator">/</span>error<span class="token punctuation">.</span>log error<span class="token punctuation">;</span> ## 로그레벨을 warn <span class="token operator">-></span> error로 변경함
+pid        <span class="token operator">/</span>var<span class="token operator">/</span>run<span class="token operator">/</span>nginx<span class="token punctuation">.</span>pid<span class="token punctuation">;</span>
+
+events <span class="token punctuation">{</span>
+    worker_connections  <span class="token number">1024</span><span class="token punctuation">;</span> ## Default<span class="token operator">:</span> <span class="token number">1024</span><span class="token punctuation">,</span> 현 서버는 RAM <span class="token number">8</span>GB라 상향조정
+    multi_accept         off<span class="token punctuation">;</span> ## Default<span class="token operator">:</span> off
+<span class="token punctuation">}</span>
+
+http <span class="token punctuation">{</span>
+    include       <span class="token operator">/</span>etc<span class="token operator">/</span>nginx<span class="token operator">/</span>mime<span class="token punctuation">.</span>types<span class="token punctuation">;</span>
+    default_type  application<span class="token operator">/</span>octet<span class="token operator">-</span>stream<span class="token punctuation">;</span>
+
+    log_format  main  '$remote_addr <span class="token operator">-</span> $remote_user <span class="token punctuation">[</span>$time_local<span class="token punctuation">]</span> <span class="token string">"$request"</span> '
+                      '$status $body_bytes_sent <span class="token string">"$http_referer"</span> '
+                      '<span class="token string">"$http_user_agent"</span> <span class="token string">"$http_x_forwarded_for"</span>'<span class="token punctuation">;</span>
+
+    access_log  <span class="token operator">/</span>var<span class="token operator">/</span>log<span class="token operator">/</span>nginx<span class="token operator">/</span>access<span class="token punctuation">.</span>log  main<span class="token punctuation">;</span>
+
+    sendfile        on<span class="token punctuation">;</span>
+    <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">tcp</span><span class="token expression">_nopush     on<span class="token punctuation">;</span></span></span>
+
+        server_tokens     off<span class="token punctuation">;</span> ## 헤더에 NGINX 버전을 숨김 <span class="token punctuation">(</span>보안상 설정 권장<span class="token punctuation">)</span>
+    keepalive_timeout  <span class="token number">65</span><span class="token punctuation">;</span> ## 접속 시 커넥션 유지 시간
+
+    <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">gzip</span>  <span class="token expression">on<span class="token punctuation">;</span></span></span>
+
+    include <span class="token operator">/</span>etc<span class="token operator">/</span>nginx<span class="token operator">/</span>conf<span class="token punctuation">.</span>d<span class="token comment">/*.conf; ## conf 붙은 모든파일을 불러오는부분
+}</span></code></pre></div>
+<ul>
+<li>ngnix 실행</li>
+</ul>
+<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c">systemctl reload nginx
+systemctl start nginx</code></pre></div>
+<h4 id="리버스-프록시" style="position:relative;"><a href="#%EB%A6%AC%EB%B2%84%EC%8A%A4-%ED%94%84%EB%A1%9D%EC%8B%9C" aria-label="리버스 프록시 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>리버스 프록시</h4>
+<ul>
+<li>reverse proxing은 <code class="language-text">proxy_pass</code>문법을 통해 이용이 가능합니다. ”<code class="language-text">/some/path/</code>로 들어온 url은 모두 <code class="language-text">http://www.example.com/link/</code>로 처리하라” 라는 의미로, 클라이언트의 <strong>요청을 특정 Url로 변환시키는 역할</strong>을 수행</li>
+<li>/etc/nginx/site-available/default의 server 항목 수정</li>
+<li>총 2개의 서버 항목이 존재할 수 있도록</li>
+<li>기본 443 포트 사용, 추가 80번 포트 접속은 https로 리다이렉트</li>
+</ul>
+<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c">server <span class="token punctuation">{</span>
+        listen                  <span class="token number">443</span><span class="token punctuation">;</span>
+        server_name             <span class="token punctuation">{</span>도메인 주소 <span class="token number">1</span><span class="token punctuation">}</span> <span class="token punctuation">{</span>도메인 주소 <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+        ssl                     on<span class="token punctuation">;</span>
+        ssl_certificate         <span class="token punctuation">{</span>공개키 경로<span class="token punctuation">}</span><span class="token punctuation">;</span>
+        ssl_certificate_key     <span class="token punctuation">{</span>개인키 경로<span class="token punctuation">}</span><span class="token punctuation">;</span>
+        ssl_protocols           TLSv1 TLSv1<span class="token punctuation">.</span><span class="token number">1</span> TLSv1<span class="token punctuation">.</span><span class="token number">2</span><span class="token punctuation">;</span>
+
+        root <span class="token punctuation">{</span>웹 루트 경로<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+        index index<span class="token punctuation">.</span>html index<span class="token punctuation">.</span>htm index<span class="token punctuation">.</span>nginx<span class="token operator">-</span>debian<span class="token punctuation">.</span>html<span class="token punctuation">;</span>
+
+        location <span class="token operator">/</span> <span class="token punctuation">{</span>
+                try_files $uri $uri<span class="token operator">/</span> <span class="token operator">=</span><span class="token number">404</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+server <span class="token punctuation">{</span>
+    listen <span class="token number">80</span><span class="token punctuation">;</span>
+    server_name <span class="token punctuation">{</span>도메인 주소 <span class="token number">1</span><span class="token punctuation">}</span> <span class="token punctuation">{</span>도메인 주소 <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">301</span> https<span class="token operator">:</span><span class="token comment">//{도메인 주소};</span>
+<span class="token punctuation">}</span></code></pre></div>
+<h2 id="nginx-환경파일-공식문서" style="position:relative;"><a href="#nginx-%ED%99%98%EA%B2%BD%ED%8C%8C%EC%9D%BC-%EA%B3%B5%EC%8B%9D%EB%AC%B8%EC%84%9C" aria-label="nginx 환경파일 공식문서 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Nginx 환경파일 공식문서</h2>
+<p><strong><a href="https://www.nginx.com/resources/wiki/start/topics/examples/full/#" target="_blank" rel="nofollow noopener noreferrer">Full Example Configuration</a></strong></p>
+<ul>
+<li>
+<p><a href="https://www.nginx.com/resources/wiki/start/topics/examples/full/#nginx-conf" target="_blank" rel="nofollow noopener noreferrer">nginx.conf</a> : 어플리케이션 기본 환경 설정</p>
+</li>
+<li>
+<p><a href="https://www.nginx.com/resources/wiki/start/topics/examples/full/#proxy-conf" target="_blank" rel="nofollow noopener noreferrer">proxy.conf</a> : 프록시 관련 환경 설정</p>
+</li>
+<li>
+<p><a href="https://www.nginx.com/resources/wiki/start/topics/examples/full/#fastcgi-conf" target="_blank" rel="nofollow noopener noreferrer">fastcgi.conf</a> : FastCGI 관련 환경 설정</p>
+</li>
+<li>
+<p><a href="https://www.nginx.com/resources/wiki/start/topics/examples/full/#mime-types" target="_blank" rel="nofollow noopener noreferrer">mime.types</a> : 파일 확장명과 MIME 타입 목록</p>
+</li>
+<li>
+<p><a href="https://www.nginx.com/resources/wiki/start/topics/examples/fullexample2/#nginx-conf" target="_blank" rel="nofollow noopener noreferrer">nginx.conf</a></p>
+</li>
+<li>
+<p><a href="https://www.nginx.com/resources/wiki/start/topics/examples/fullexample2/#" target="_blank" rel="nofollow noopener noreferrer">Another Full Example</a></p>
+</li>
+<li>
+<p>sites.conf : Ngnix에 의해 서비스되는 가상 호스트 웹사이트 환경 설정. 도메인마다 파일을 분리해서 만들 것을 권장</p>
+</li>
+<li>
+<p>상태 확인</p>
+</li>
+</ul>
+<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c">systemctl status nginx</code></pre></div>
+<ul>
+<li>서버 재시작 및 리로드</li>
+</ul>
+<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c"><span class="token comment">// Restart ## 서버 중단 후 재가동</span>
+sudo service nginx restart
+
+<span class="token comment">// Reload ## 서버 중단 없이 reload 시점 설정 파일만 다시 불러와 적용</span>
+nginx <span class="token operator">-</span>s reload
+
+reload <span class="token comment">// 설정 파일을 다시 불러오기</span>
+quit <span class="token comment">// 서버 shutdown</span>
+stop <span class="token comment">// 서버 즉시 중단</span>
+reopen <span class="token comment">// 로그 파일을 다시 열기</span></code></pre></div>
+<ul>
+<li>구성 테스트</li>
+</ul>
+<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c">sudo nginx <span class="token operator">-</span>t
+
+<span class="token macro property"><span class="token directive-hash">#</span> <span class="token directive keyword">nginx</span><span class="token expression"><span class="token operator">:</span> the configuration file <span class="token operator">/</span>etc<span class="token operator">/</span>nginx<span class="token operator">/</span>nginx<span class="token punctuation">.</span>conf syntax is ok</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span> <span class="token directive keyword">nginx</span><span class="token expression"><span class="token operator">:</span> configuration file <span class="token operator">/</span>etc<span class="token operator">/</span>nginx<span class="token operator">/</span>nginx<span class="token punctuation">.</span>conf test is successful</span></span></code></pre></div>
+<ul>
+<li>Ngnix index.html 위치</li>
+</ul>
+<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c"><span class="token comment">// NGINX</span>
+cd <span class="token operator">/</span>usr<span class="token operator">/</span>share<span class="token operator">/</span>nginx<span class="token operator">/</span>html</code></pre></div></div></div></div><div class="Post-module--footer--f8705"><div class="Meta-module--meta--dae0a"><p class="Meta-module--date--4d30d">Published<!-- --> <!-- -->Aug 22, 2023</p></div><div class="Tags-module--tags--18589"><ul class="Tags-module--list--82ae6"><li class="Tags-module--item--52015"><a class="Button-module--button--b1113" href="/tag/ssh/">SSH</a></li><li class="Tags-module--item--52015"><a class="Button-module--button--b1113" href="/tag//">암호화</a></li></ul></div><div class="Author-module--author--1c58d"><p class="Author-module--bio--08950">프론트엔드 개발자 김가영입니다. 개발과 일에 대한 생각을 주로 씁니다. https://velog.io/@kykim_dev/posts (2023 이전 블로깅)</p></div></div><div class="Post-module--comments--d3b99"></div></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/posts/Node-Ngnix-설정하기";window.___webpackCompilationHash="e68160d7ff6f706d73e1";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-64070fc073999077ef2e.js"],"component---cache-caches-gatsby-plugin-offline-app-shell-js":["/component---cache-caches-gatsby-plugin-offline-app-shell-js-0c915c7b1bdb5eac4fdf.js"],"component---src-templates-categories-template-categories-template-tsx":["/component---src-templates-categories-template-categories-template-tsx-137238e444d313754b01.js"],"component---src-templates-category-template-category-template-tsx":["/component---src-templates-category-template-category-template-tsx-33f79dd269fc425931db.js"],"component---src-templates-index-template-index-template-tsx":["/component---src-templates-index-template-index-template-tsx-f28258cd90c7b87b90a9.js"],"component---src-templates-not-found-template-not-found-template-tsx":["/component---src-templates-not-found-template-not-found-template-tsx-59ab4889a006f6b6b418.js"],"component---src-templates-page-template-page-template-tsx":["/component---src-templates-page-template-page-template-tsx-ff6ca5ae4398536e97b2.js"],"component---src-templates-post-template-post-template-tsx":["/component---src-templates-post-template-post-template-tsx-bf408e7aa8e87d12df32.js"],"component---src-templates-tag-template-tag-template-tsx":["/component---src-templates-tag-template-tag-template-tsx-7671a9832960b0a79956.js"],"component---src-templates-tags-template-tags-template-tsx":["/component---src-templates-tags-template-tags-template-tsx-622232ef81577a36056e.js"]};/*]]>*/</script><script src="/app-64070fc073999077ef2e.js" async=""></script><script src="/framework-745d5d28c0250a1a333b.js" async=""></script><script src="/webpack-runtime-dfe333d4dcceff0d6cd8.js" async=""></script></body></html>
