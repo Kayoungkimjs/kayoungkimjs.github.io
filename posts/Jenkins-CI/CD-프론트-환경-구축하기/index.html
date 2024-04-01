@@ -1,0 +1,967 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 4.25.8"/><meta name="description" content="프로젝트 자동 배포를 위해 프론트엔드 서버 Jenkins 설정을 할 수 있다" data-gatsby-head="true"/><meta name="twitter:card" content="summary_large_image" data-gatsby-head="true"/><meta name="twitter:title" content="Jenkins CI/CD 프론트 환경 구축하기 - Kykim.dev" data-gatsby-head="true"/><meta name="twitter:description" content="프로젝트 자동 배포를 위해 프론트엔드 서버 Jenkins 설정을 할 수 있다" data-gatsby-head="true"/><meta name="og:title" content="Jenkins CI/CD 프론트 환경 구축하기 - Kykim.dev" data-gatsby-head="true"/><meta name="og:type" content="website" data-gatsby-head="true"/><meta name="og:description" content="프로젝트 자동 배포를 위해 프론트엔드 서버 Jenkins 설정을 할 수 있다" data-gatsby-head="true"/><meta name="theme-color" content="hsl(31, 92%, 62%)"/><style data-href="/styles.462ccd878fdc76b93a3f.css" data-identity="gatsby-global-css">:after,:before,:root{--color-white:#fff;--color-primary:#5c92ff;--color-secondary:#f7a145;--color-prism-background:#eaeaeb;--color-typographic-base-font:#242933;--color-typographic-link-p-font:#5c92ff;--color-typographic-link-s-font:#f7a145;--color-page-border:#eaeaeb;--color-page-background:#fff;--color-sidebar-border:#eaeaeb;--color-sidebar-border-fade:#fff;--color-contacts-border:#eaeaeb;--color-button-border:#eaeaeb;--color-button-color:#242933;--color-theme-switcher:#3f485a;--color-theme-switcher-hover:#5c92ff}.dark :after,.dark :before,:root.dark{--color-white:#fff;--color-primary:#5c92ff;--color-secondary:#f7a145;--color-prism-background:#191d24;--color-typographic-base-font:#fff;--color-typographic-link-p-font:#5c92ff;--color-typographic-link-s-font:#f7a145;--color-page-border:#3f485a;--color-page-background:#242933;--color-sidebar-border:#3f485a;--color-sidebar-border-fade:#242933;--color-contacts-border:#3f485a;--color-button-border:#3f485a;--color-button-color:#fff;--color-theme-switcher:#eaeaeb;--color-theme-switcher-hover:#5c92ff}html{font-size:100}body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;background:var(--color-page-background);color:var(--color-typographic-base-font);font-size:16px;line-height:1.625;margin:0 0 0 calc(100vw - 100%);text-rendering:optimizelegibility}body,h1,h2,h3,h4,h5,h6{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif}h1,h2,h3,h4,h5,h6{font-weight:600}h1{font-size:40px;line-height:52px;margin-bottom:26px;margin-top:104px}h2{font-size:27px;line-height:39px}h2,h3{margin-bottom:13px;margin-top:52px}h3{font-size:22px;line-height:26px}h4{font-size:19.2px;margin-top:39px}h4,h5{line-height:26px;margin-bottom:13px}h5,h6{font-size:16px;margin-top:65px}h6{line-height:26px;margin-bottom:13px}img{max-width:100%}hr,img{border:0;display:block}hr{background-image:linear-gradient(180deg,transparent 1px,transparent 11px,#242933 0,#242933 15px,transparent 0,transparent 26px);background-size:100% 26px;color:var(--color-typographic-base-font);height:26px;margin:52px auto;width:100px}a{color:var(--color-typographic-link-p-font);text-decoration:none}a:active,a:focus,a:hover{color:var(--color-typographic-link-s-font)}b,strong{font-weight:600}ul{list-style:square;margin-bottom:26px}ul li{margin-bottom:10px;padding:0 5px}p{line-height:26px;margin-bottom:26px}blockquote{font-style:italic;padding:0;text-align:center}figure{display:block;height:auto;width:100%}figcaption{color:var(--color-typographic-base-font);font-size:14px;font-style:italic;line-height:19.5px;margin-bottom:0;margin-top:6.5px;text-align:center}@media screen and (min-width:685px){figure.float-left,figure.float-right{max-width:310px;padding:0 26px}.float-right{float:right}.float-left{float:left}}code[class*=language-],pre[class*=language-]{word-wrap:normal;color:#657b83;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;-webkit-hyphens:none;hyphens:none;line-height:1.5;tab-size:4;text-align:left;white-space:pre;word-break:normal;word-spacing:normal}pre[class*=language-]{border-radius:.3em;margin:.5em 0;overflow:auto;padding:1em}:not(pre)>code[class*=language-],pre[class*=language-]{background-color:var(--color-prism-background)}:not(pre)>code[class*=language-]{border-radius:.3em;padding:.1em}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{background:#073642}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#93a1a1}.token.punctuation{color:#586e75}.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol,.token.tag{color:#268bd2}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string,.token.url{color:#2aa198}.token.entity{background:#eee8d5;color:#657b83;cursor:help}.token.atrule,.token.attr-value,.token.keyword{color:#859900}.token.class-name,.token.function{color:#b58900}.token.important,.token.regex,.token.variable{color:#cb4b16}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.Feed-module--feed--a6204 .Feed-module--item--c7a63{margin-bottom:32.5px}.Feed-module--feed--a6204 .Feed-module--item--c7a63:last-child{margin-bottom:13px}.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--title--f252f{font-size:27px;line-height:39px;margin-bottom:13px;margin-top:0}.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--title--f252f .Feed-module--link--6123b{color:var(--color-typographic-base-font)}.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--title--f252f .Feed-module--link--6123b:focus,.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--title--f252f .Feed-module--link--6123b:hover{border-bottom:1px solid #242933;color:var(--color-typographic-base-font)}.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--description--57348{font-size:16px;line-height:26px;margin-bottom:19.5px}.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--meta--250c2 .Feed-module--time--72864{color:var(--color-typographic-base-font);font-size:14px;font-weight:600;text-transform:uppercase}.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--meta--250c2 .Feed-module--divider--81a18{margin:0 13px}.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--meta--250c2 .Feed-module--category--59f58 .Feed-module--link--6123b{color:var(--color-secondary);font-size:14px;font-weight:600;text-transform:uppercase}.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--meta--250c2 .Feed-module--category--59f58 .Feed-module--link--6123b:focus,.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--meta--250c2 .Feed-module--category--59f58 .Feed-module--link--6123b:hover{color:#5c92ff}.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--more--51a4e{color:var(--color-primary);font-size:16px}.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--more--51a4e:focus,.Feed-module--feed--a6204 .Feed-module--item--c7a63 .Feed-module--more--51a4e:hover{border-bottom:1px solid #5c92ff;color:var(--color-primary)}.Layout-module--layout--2c933{margin-left:auto;margin-right:auto;max-width:1070px}.Layout-module--layout--2c933:before{content:"";display:table}.Layout-module--layout--2c933:after{clear:both;content:"";display:table}.Page-module--page--24e03{margin-bottom:52px}.Page-module--page--24e03 .Page-module--inner--4b31d{padding:26px 19.5px 0}.Page-module--page--24e03 .Page-module--title--90338{font-size:40px;font-weight:600;line-height:52px;margin-bottom:37.7px;margin-top:0}.Page-module--page--24e03 .Page-module--body--561c4{font-size:16px;line-height:26px;margin:0 0 26px}@media screen and (min-width:685px){.Page-module--page--24e03{width:calc(58.275% - 12.5px)}.Page-module--page--24e03:nth-child(1n){clear:none;float:left;margin-right:30px}.Page-module--page--24e03:last-child{margin-right:0}.Page-module--page--24e03:nth-child(12n){float:right;margin-right:0}.Page-module--page--24e03:nth-child(12n+1){clear:both}.Page-module--page--24e03 .Page-module--inner--4b31d{padding:32.5px 19.5px 0}}@media screen and (min-width:960px){.Page-module--page--24e03{width:calc(66.6% - 10px)}.Page-module--page--24e03:nth-child(1n){clear:none;float:left;margin-right:30px}.Page-module--page--24e03:last-child{margin-right:0}.Page-module--page--24e03:nth-child(3n){float:right;margin-right:0}.Page-module--page--24e03:nth-child(3n+1){clear:both}.Page-module--page--24e03 .Page-module--inner--4b31d{padding:39px 26px 0}}.Pagination-module--pagination--d61cb{display:flex;margin-top:52px}.Pagination-module--pagination--d61cb .Pagination-module--previous--4a76b{text-align:left;width:50%}.Pagination-module--pagination--d61cb .Pagination-module--previous--4a76b .Pagination-module--previousLink--5590d{color:var(--color-secondary);font-size:26px;font-weight:700}.Pagination-module--pagination--d61cb .Pagination-module--previous--4a76b .Pagination-module--previousLink--5590d:focus,.Pagination-module--pagination--d61cb .Pagination-module--previous--4a76b .Pagination-module--previousLink--5590d:hover{color:var(--color-primary)}.Pagination-module--pagination--d61cb .Pagination-module--previous--4a76b .Pagination-module--previousLink--5590d.Pagination-module--disable--7e105{color:#3f485a;pointer-events:none}.Pagination-module--pagination--d61cb .Pagination-module--next--1cab8{text-align:right;width:50%}.Pagination-module--pagination--d61cb .Pagination-module--next--1cab8 .Pagination-module--nextLink--532ff{color:var(--color-secondary);font-size:26px;font-weight:700}.Pagination-module--pagination--d61cb .Pagination-module--next--1cab8 .Pagination-module--nextLink--532ff:focus,.Pagination-module--pagination--d61cb .Pagination-module--next--1cab8 .Pagination-module--nextLink--532ff:hover{color:var(--color-primary)}.Pagination-module--pagination--d61cb .Pagination-module--next--1cab8 .Pagination-module--nextLink--532ff.Pagination-module--disable--7e105{color:#3f485a;pointer-events:none}.Button-module--button--b1113{border:1px solid var(--color-button-border);border-radius:20px;color:var(--color-button-color);display:inline-block;font-size:16px;font-weight:400;height:40px;line-height:40px;margin-left:auto;margin-right:auto;padding:0 26px;text-align:center;text-decoration:none}.Button-module--button--b1113:focus,.Button-module--button--b1113:hover{color:#5c92ff}.ThemeSwitcher-module--themeSwitcher--8a77f{--color:var(--color-theme-switcher)}.ThemeSwitcher-module--themeSwitcher--8a77f .ThemeSwitcher-module--button--7cb7b{align-items:center;background:transparent;border:0;cursor:pointer;display:flex;justify-content:center;outline:0}.ThemeSwitcher-module--themeSwitcher--8a77f .ThemeSwitcher-module--button--7cb7b svg{stroke:var(--color);pointer-events:none;transition:stroke .4s}.ThemeSwitcher-module--themeSwitcher--8a77f .ThemeSwitcher-module--button--7cb7b:hover{--color:var(--color-theme-switcher-hover)}.ThemeSwitcher-module--themeSwitcher--8a77f .ThemeSwitcher-module--moon--10537{stroke-dasharray:0 1px;opacity:0;transition:stroke-dasharray .2s ease-in,opacity .4s ease-in}.ThemeSwitcher-module--themeSwitcher--8a77f .ThemeSwitcher-module--sun--2163a{stroke-dasharray:1px 1px;opacity:1;transition:stroke-dasharray .2s ease-in,opacity .4s ease-in}.ThemeSwitcher-module--themeSwitcher--8a77f.ThemeSwitcher-module--dark--6db0c .ThemeSwitcher-module--moon--10537{stroke-dasharray:1px 1px;opacity:1}.ThemeSwitcher-module--themeSwitcher--8a77f.ThemeSwitcher-module--dark--6db0c .ThemeSwitcher-module--sun--2163a{stroke-dasharray:0 1px;opacity:0}.Author-module--author--cbd31 .Author-module--photo--9787b{background-clip:padding-box;border-radius:50%;display:inline-block;height:75px;margin-bottom:0;width:75px}.Author-module--author--cbd31 .Author-module--photo--9787b img{border-radius:50%}.Author-module--author--cbd31 .Author-module--title--cf7e5{font-size:18px;font-weight:600;line-height:29.25px;margin:0}.Author-module--author--cbd31 .Author-module--title--cf7e5 .Author-module--link--09c17,.Author-module--author--cbd31 .Author-module--title--cf7e5 .Author-module--link--09c17:focus,.Author-module--author--cbd31 .Author-module--title--cf7e5 .Author-module--link--09c17:hover{color:var(--color-typographic-base-font)}.Author-module--author--cbd31 .Author-module--subtitle--86ec5{color:#7f8ba4;line-height:26px;margin-bottom:26px}.Author-module--author--cbd31 .Author-module--titleContainer--4f576{align-items:center;display:flex;justify-content:space-between;margin:13px 0}.Icon-module--icon--1d7da{fill:currentcolor;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;speak:none;stroke:currentcolor;stroke-width:0;display:inline-block;font-style:normal;font-variant:normal;font-weight:400;height:1em;line-height:1em;text-align:center;text-transform:none;width:1em}.Contacts-module--contacts--09178{margin-bottom:26px}.Contacts-module--contacts--09178 .Contacts-module--list--9670b{display:flex;flex-flow:row wrap;flex-grow:0;flex-shrink:0;list-style:none;margin:13px 0;max-width:165px;padding:0}.Contacts-module--contacts--09178 .Contacts-module--list--9670b .Contacts-module--item--f9cb0{align-content:center;align-items:center;border:1px solid var(--color-contacts-border);border-radius:50%;display:flex;height:40px;justify-content:center;line-height:40px;margin:6.5px;padding:0;text-align:center;width:40px}.Contacts-module--contacts--09178 .Contacts-module--list--9670b .Contacts-module--item--f9cb0:nth-child(3n+1){margin-left:0}.Contacts-module--contacts--09178 .Contacts-module--list--9670b .Contacts-module--item--f9cb0 .Contacts-module--link--de1e0{border:0;color:var(--color-typographic-base-font);cursor:pointer;display:flex}.Contacts-module--contacts--09178 .Contacts-module--list--9670b .Contacts-module--item--f9cb0 .Contacts-module--link--de1e0:focus,.Contacts-module--contacts--09178 .Contacts-module--list--9670b .Contacts-module--item--f9cb0 .Contacts-module--link--de1e0:hover{color:var(--color-typographic-link-p-font)}.Copyright-module--copyright--2c602{color:#7f8ba4;font-size:14px}.Menu-module--menu--113a9{margin-bottom:26px}.Menu-module--menu--113a9 .Menu-module--list--e1ae3{list-style:none;margin:0;padding:0}.Menu-module--menu--113a9 .Menu-module--list--e1ae3 .Menu-module--item--8b679{margin:13px 0;padding:0}.Menu-module--menu--113a9 .Menu-module--list--e1ae3 .Menu-module--item--8b679 .Menu-module--link--a6f02{border:0;color:var(--color-typographic-base-font);font-size:16px;font-weight:400}.Menu-module--menu--113a9 .Menu-module--list--e1ae3 .Menu-module--item--8b679 .Menu-module--link--a6f02:focus,.Menu-module--menu--113a9 .Menu-module--list--e1ae3 .Menu-module--item--8b679 .Menu-module--link--a6f02:hover{border-bottom:1px solid #5c92ff;color:#5c92ff}.Menu-module--menu--113a9 .Menu-module--list--e1ae3 .Menu-module--item--8b679 .Menu-module--link--a6f02.Menu-module--active--6cb74{border-bottom:1px solid var(--color-typographic-base-font);color:var(--color-typographic-base-font)}.Sidebar-module--sidebar--1bfa1{width:100%}.Sidebar-module--sidebar--1bfa1 .Sidebar-module--inner--344d0{padding:26px 19.5px 0;position:relative}.Sidebar-module--sidebar--1bfa1 .Sidebar-module--inner--344d0:after{background:var(--color-sidebar-border);background:linear-gradient(to bottom,var(--color-sidebar-border) 0,var(--color-sidebar-border) 48%,var(--color-sidebar-border-fade) 100%)}@media screen and (min-width:685px){.Sidebar-module--sidebar--1bfa1{width:calc(41.625% - 17.5px)}.Sidebar-module--sidebar--1bfa1:nth-child(1n){clear:none;float:left;margin-right:30px}.Sidebar-module--sidebar--1bfa1:last-child{margin-right:0}.Sidebar-module--sidebar--1bfa1:nth-child(12n){float:right;margin-right:0}.Sidebar-module--sidebar--1bfa1:nth-child(12n+1){clear:both}.Sidebar-module--sidebar--1bfa1 .Sidebar-module--inner--344d0{padding:32.5px 19.5px 0}.Sidebar-module--sidebar--1bfa1 .Sidebar-module--inner--344d0:after{bottom:0;content:"";height:540px;position:absolute;right:-10px;top:30px;width:1px}}@media screen and (min-width:960px){.Sidebar-module--sidebar--1bfa1{width:calc(33.3% - 20px)}.Sidebar-module--sidebar--1bfa1:nth-child(1n){clear:none;float:left;margin-right:30px}.Sidebar-module--sidebar--1bfa1:last-child{margin-right:0}.Sidebar-module--sidebar--1bfa1:nth-child(3n){float:right;margin-right:0}.Sidebar-module--sidebar--1bfa1:nth-child(3n+1){clear:both}.Sidebar-module--sidebar--1bfa1 .Sidebar-module--inner--344d0{padding:39px}}.Author-module--author--1c58d{border-top:1px solid var(--color-page-border);line-height:26px;margin-bottom:52px;margin-top:26px;max-width:640px;padding-top:26px}.Author-module--author--1c58d .Author-module--bio--08950 .Author-module--twitter--90647{display:block;text-decoration:underline}.Author-module--author--1c58d .Author-module--bio--08950 .Author-module--twitter--90647:focus,.Author-module--author--1c58d .Author-module--bio--08950 .Author-module--twitter--90647:hover{color:var(--color-typographic-link-s-font)}@media screen and (min-width:685px){.Author-module--author--1c58d{margin-left:auto;margin-right:auto}}.Content-module--content--80d58{margin:0 auto;max-width:945px;padding:0 13px}.Content-module--content--80d58 .Content-module--title--09504{font-size:32px;font-weight:600;line-height:42.9px;margin:26px auto 0;max-width:640px;text-align:center}.Content-module--content--80d58 .Content-module--body--726c2 figure{margin-bottom:26px}.Content-module--content--80d58 .Content-module--body--726c2 figure blockquote{font-style:italic;margin-top:0;padding:26px 0;text-align:center}.Content-module--content--80d58 .Content-module--body--726c2 figure blockquote p{font-size:26.9072px;line-height:39px;margin-bottom:26px;margin-top:0;max-width:640px}.Content-module--content--80d58 .Content-module--body--726c2 a{text-decoration:underline}.Content-module--content--80d58 .Content-module--body--726c2 *{margin-left:auto;margin-right:auto;max-width:640px}.Content-module--content--80d58 .Content-module--body--726c2 h2>a{visibility:hidden}.Content-module--content--80d58 .Content-module--body--726c2 h2>a>svg{fill:var(--color-typographic-base-font)}.Content-module--content--80d58 .Content-module--body--726c2 img{max-width:100%}@media screen and (min-width:960px){.Content-module--content--80d58{padding:0}.Content-module--content--80d58 .Content-module--title--09504{font-size:48px;line-height:58.5px;margin-bottom:39px;margin-top:58.5px}.Content-module--content--80d58 .Content-module--body--726c2,.Content-module--content--80d58 .Content-module--body--726c2 p{font-size:18px;line-height:29.25px;margin-bottom:29.25px}.Content-module--content--80d58 .Content-module--body--726c2 h2>a{padding-right:13px;visibility:unset}}.Meta-module--meta--dae0a .Meta-module--date--4d30d{font-style:italic}.Tags-module--tags--18589{margin-bottom:13px}.Tags-module--tags--18589 .Tags-module--list--82ae6{list-style:none;padding:0}.Tags-module--tags--18589 .Tags-module--list--82ae6 .Tags-module--item--52015{display:inline-block;margin:6.5px 0}@media screen and (min-width:685px){.Tags-module--tags--18589 .Tags-module--list--82ae6 .Tags-module--item--52015:first-child{margin-left:0;padding-left:0}}.Post-module--post--3a994 .Post-module--content--3c6e5{margin:0 auto}.Post-module--post--3a994 .Post-module--comments--d3b99,.Post-module--post--3a994 .Post-module--footer--f8705{margin:0 auto;max-width:640px;padding:0 13px}.Post-module--post--3a994 .Post-module--buttons--2972d{align-items:center;display:flex;justify-content:center;margin:26px 0 0;text-align:center}.Post-module--post--3a994 .Post-module--buttons--2972d .Post-module--buttonArticles--d793a{margin:0 13px 0 0}@media screen and (min-width:960px){.Post-module--post--3a994 .Post-module--comments--d3b99,.Post-module--post--3a994 .Post-module--footer--f8705{padding:0}.Post-module--post--3a994 .Post-module--buttons--2972d{left:30px;margin:0 13px 0 0;max-width:none;position:fixed;top:30px}}</style><title data-gatsby-head="true">Jenkins CI/CD 프론트 환경 구축하기 - Kykim.dev</title><link rel="alternate" type="application/rss+xml" title="Kykim.dev" href="/rss.xml"/><style type="text/css">
+    .anchor.before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateX(-100%);
+      padding-right: 4px;
+    }
+    .anchor.after {
+      display: inline-block;
+      padding-left: 4px;
+    }
+    h1 .anchor svg,
+    h2 .anchor svg,
+    h3 .anchor svg,
+    h4 .anchor svg,
+    h5 .anchor svg,
+    h6 .anchor svg {
+      visibility: hidden;
+    }
+    h1:hover .anchor svg,
+    h2:hover .anchor svg,
+    h3:hover .anchor svg,
+    h4:hover .anchor svg,
+    h5:hover .anchor svg,
+    h6:hover .anchor svg,
+    h1 .anchor:focus svg,
+    h2 .anchor:focus svg,
+    h3 .anchor:focus svg,
+    h4 .anchor:focus svg,
+    h5 .anchor:focus svg,
+    h6 .anchor:focus svg {
+      visibility: visible;
+    }
+  </style><script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      var hash = window.decodeURI(location.hash.replace('#', ''))
+      if (hash !== '') {
+        var element = document.getElementById(hash)
+        if (element) {
+          var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+          var clientTop = document.documentElement.clientTop || document.body.clientTop || 0
+          var offset = element.getBoundingClientRect().top + scrollTop - clientTop
+          // Wait for the browser to finish rendering before scrolling.
+          setTimeout((function() {
+            window.scrollTo(0, offset - 0)
+          }), 0)
+        }
+      }
+    })
+  </script><link rel="preconnect" href="https://www.googletagmanager.com"/><link rel="dns-prefetch" href="https://www.googletagmanager.com"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-73379983-2"></script><script>
+      
+      
+      if(true) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){window.dataLayer && window.dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-73379983-2', {"send_page_view":false});
+      }
+      </script><link rel="sitemap" type="application/xml" href="/sitemap/sitemap-index.xml"/><link rel="icon" href="/favicon-32x32.png?v=8a262f5ad3970ad9fe18a6532955f993" type="image/png"/><link rel="manifest" href="/manifest.webmanifest" crossorigin="anonymous"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=8a262f5ad3970ad9fe18a6532955f993"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=8a262f5ad3970ad9fe18a6532955f993"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=8a262f5ad3970ad9fe18a6532955f993"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=8a262f5ad3970ad9fe18a6532955f993"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=8a262f5ad3970ad9fe18a6532955f993"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=8a262f5ad3970ad9fe18a6532955f993"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=8a262f5ad3970ad9fe18a6532955f993"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=8a262f5ad3970ad9fe18a6532955f993"/><style>.gatsby-image-wrapper{position:relative;overflow:hidden}.gatsby-image-wrapper picture.object-fit-polyfill{position:static!important}.gatsby-image-wrapper img{bottom:0;height:100%;left:0;margin:0;max-width:none;padding:0;position:absolute;right:0;top:0;width:100%;object-fit:cover}.gatsby-image-wrapper [data-main-image]{opacity:0;transform:translateZ(0);transition:opacity .25s linear;will-change:opacity}.gatsby-image-wrapper-constrained{display:inline-block;vertical-align:top}</style><noscript><style>.gatsby-image-wrapper noscript [data-main-image]{opacity:1!important}.gatsby-image-wrapper [data-placeholder-image]{opacity:0!important}</style></noscript><script type="module">const e="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;e&&document.body.addEventListener("load",(function(e){const t=e.target;if(void 0===t.dataset.mainImage)return;if(void 0===t.dataset.gatsbyImageSsr)return;let a=null,n=t;for(;null===a&&n;)void 0!==n.parentNode.dataset.gatsbyImageWrapper&&(a=n.parentNode),n=n.parentNode;const o=a.querySelector("[data-placeholder-image]"),r=new Image;r.src=t.currentSrc,r.decode().catch((()=>{})).then((()=>{t.style.opacity=1,o&&(o.style.opacity=0,o.style.transition="opacity 500ms linear")}))}),!0);</script></head><body><script>
+          void function() {
+            var cachedMode;
+
+            try {
+              var preferredTheme = JSON.parse(localStorage.getItem('diesel:theme-atom'));
+
+              if (preferredTheme && preferredTheme.mode) {
+                cachedMode = preferredTheme.mode;
+              }
+            } catch (err) { }
+
+            function setTheme(newTheme) {
+              document.documentElement.className = newTheme;
+            }
+
+            var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+            setTheme(cachedMode || (darkQuery.matches ? 'dark' : 'light'));
+          }()
+        </script><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="Layout-module--layout--2c933"><div class="Post-module--post--3a994"><div class="Post-module--buttons--2972d"><a class="Button-module--button--b1113 Post-module--buttonArticles--d793a" href="/">All Articles</a></div><div class="Post-module--content--3c6e5"><div class="Content-module--content--80d58"><h1 class="Content-module--title--09504">Jenkins CI/CD 프론트 환경 구축하기</h1><div class="Content-module--body--726c2"><h2 id="1-아이템-생성" style="position:relative;"><a href="#1-%EC%95%84%EC%9D%B4%ED%85%9C-%EC%83%9D%EC%84%B1" aria-label="1 아이템 생성 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. 아이템 생성</h2>
+<p><code class="language-text">Dashboard → 새로운 Item</code>
+<span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 752px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/4dc3fb10478b2f92536944b152b83070/442cb/image1.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 70.41666666666667%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAABYlAAAWJQFJUiTwAAAB20lEQVQ4y32S227bMBBE9f+fVvQtQBpUqe3ozvtFtCRLNKZY2rTVIsnDwa5IaTizVLFtEdp6GHeDejcGhGnGeJ4xTjfC9Oy/Il6vKM7zgpe3d/x6P+K1PODlrcSh7iFsANMezHgM2mNQDoP+BuWwbhuKaVlxGiwq5tCbBYO9oNMTWnVOdGpCJQJ65cD096xbREGqHdfouQQTCkIb+DDBhTPsGBJuPMOHz3G5jgFbjChivKL6/RMfxxJlWeJw+APOGQTnMFrDGgMlJYQQkFJCaw2tFKQUqdI+rY/e40ozjDFCGQPGOZRS8N7DWJvqsiz/MM8zpmnGlOqUmO891XQpZLPjCsfTCXVdpdM45+j7HsMwJLquQ9u2qVfJnUxQbyjB3cg1CypjMTCGpmkeUETnHKy1qdKHVLOz7GrPQ7BjAk3boq7r5IIE6dS9IFUSNfeZ0dq6rrhcLgkaCY2v2LYVP15rlIcKSslknV5Ow79D4ntINO/lg56Rtw1SO3R9j6apk0uaIUVmjCVyT+sZmjGtkdA4jgghPAV7xvFR1SlqVVVJIDvNkffPFI/ifh45bvioW1TVzR2xn98eEiUn/19GJt5+7AipNLgQj6gkqLWBvl9C/jUoGrn5SpAi/wWKZSmOVzTm0wAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/4dc3fb10478b2f92536944b152b83070/8ac56/image1.webp 240w,
+/static/4dc3fb10478b2f92536944b152b83070/d3be9/image1.webp 480w,
+/static/4dc3fb10478b2f92536944b152b83070/8cb39/image1.webp 752w"
+              sizes="(max-width: 752px) 100vw, 752px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/4dc3fb10478b2f92536944b152b83070/8ff5a/image1.png 240w,
+/static/4dc3fb10478b2f92536944b152b83070/e85cb/image1.png 480w,
+/static/4dc3fb10478b2f92536944b152b83070/442cb/image1.png 752w"
+            sizes="(max-width: 752px) 100vw, 752px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/4dc3fb10478b2f92536944b152b83070/442cb/image1.png"
+            alt="image1.png"
+            title="image1.png"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<ol>
+<li><strong>Enter an item name</strong>
+<ul>
+<li>프로젝트 명 입력</li>
+</ul>
+</li>
+<li><strong>Freestyle project 선택</strong></li>
+</ol>
+<h2 id="2-테스트-구성-세팅" style="position:relative;"><a href="#2-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EA%B5%AC%EC%84%B1-%EC%84%B8%ED%8C%85" aria-label="2 테스트 구성 세팅 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. 테스트 구성 세팅</h2>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 540px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/4be018f2482a839aa36dac1f68feac8d/07484/image2.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 97.08333333333334%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAYAAACQjC21AAAACXBIWXMAABYlAAAWJQFJUiTwAAABqUlEQVQ4y51UiU7lIBT1/79uNKOJUZ8+WrpgoVC2LtAzgRk7z5joa0kOCc3tuffc7QYARN/j6fmE19czzqQA5wLWWrQtQ1lSFCUFIQWUUnDOYhzHL4gxJircpEtrA0pr0OovBq2zUcc5qqpG07SomxbGGHjvMU3T94RxjYhY8od1XbEsC+Z5RggBe076NxMOI8cz+wX+LlAUBJQmiQSMsc0zsF5HmC6pHbpeo+slem0wuBGD8xnKuB8hjcMS/klOhAUTuH8pcfvwiLeKoeYSJROg79egz7bTvPzPoR8deFdDG5sr7scpe5yXgCX8jGSXAtsIp9GBlS/gnOf8pSoeOVtRlLZ4qwWcc5BKbdVNBnuwRciVx92JY1ASlFZbZT+M9pxMaJ1C2xS5wdM0DMOwke0lzYSdanAiT3nkqoqiaZpPsvdHaCYQ0sFa8yV/hyQ7P4EJk4tyOW6HCYNSsPe/wXuZxy0hLYLDkqP3GKsKxlpIKXOkH714qG2cNyDnR3Rdh7Zt84q6jG434TxPUD2H1hpCiLzfjsjdtk1MHi4WVHqHEBHilQhxi/AP6CTOk4HkxIkAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/4be018f2482a839aa36dac1f68feac8d/8ac56/image2.webp 240w,
+/static/4be018f2482a839aa36dac1f68feac8d/d3be9/image2.webp 480w,
+/static/4be018f2482a839aa36dac1f68feac8d/9e625/image2.webp 540w"
+              sizes="(max-width: 540px) 100vw, 540px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/4be018f2482a839aa36dac1f68feac8d/8ff5a/image2.png 240w,
+/static/4be018f2482a839aa36dac1f68feac8d/e85cb/image2.png 480w,
+/static/4be018f2482a839aa36dac1f68feac8d/07484/image2.png 540w"
+            sizes="(max-width: 540px) 100vw, 540px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/4be018f2482a839aa36dac1f68feac8d/07484/image2.png"
+            alt="image2.png"
+            title="image2.png"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span>
+<code class="language-text">메뉴 → 구성</code></p>
+<h3 id="2-1-소스코드-관리" style="position:relative;"><a href="#2-1-%EC%86%8C%EC%8A%A4%EC%BD%94%EB%93%9C-%EA%B4%80%EB%A6%AC" aria-label="2 1 소스코드 관리 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2-1. 소스코드 관리</h3>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 790px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/1e363938a8d611ed8ca952063d9ba746/2e237/image3.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 106.25%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAVCAYAAABG1c6oAAAACXBIWXMAABYlAAAWJQFJUiTwAAAB/UlEQVQ4y5VUia7aMBDk/7+rUj+jKuSFHM7lM3ESppoNhvBKKSCNFjn2ZHZ24kOnDbKixmAclFJQTYu8apBXCue6wVe51UJ1so+1GSyawdxQdxq9ccDlgsOgNcq6RlGWMMbAhwBj3d9w92qdf4A2Fs4HXIRwGFAUBeq6hnMO0zS9gfEBcZqwzHEjVL1Hfi4QvJfN4zh+hDlOUIPFr7IDfwfvvagjQghPFb0ipLpWW5Sd2Qh5oKoqnE4naZ1t00tWa63gXy+arq2STIZCQr6FPrZtC601uq4T9H0v66zS2jzfEGN8QBhHgXjIzYzL8XgUZVRDdQTtoEKuS7UWTEVSzLNLjChajVZfFSYCqmKloqZpbkqpnJXq236QnCbCePM3yH9RyIdibozbpm/tJOyfJXXOeVSqQVEphDBuwf5u+CeRabteIqdUI2dFIX1KHrHlpOBd8nlZMK4rjPUAroR5niPLMqn0iiD5SzJatSzwpyN+//iJXIeNkEpofFmWMgxOnJWK92qfgjGyBuUph/bjRkgPU7vrumJZFsGzvD0bVLgSTymHtwjspvcOuJe55FDKqn4cSvJNX0P7yaR52/AKG/ZDOZ/P4htD/d71dcccIzTz2On7bcNLIX0d9PId//Ygady3nH3l4gWn/d+4vPBUCGWq6yoT5sJ+0p8gnf8DOHpc8JANbi4AAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/1e363938a8d611ed8ca952063d9ba746/8ac56/image3.webp 240w,
+/static/1e363938a8d611ed8ca952063d9ba746/d3be9/image3.webp 480w,
+/static/1e363938a8d611ed8ca952063d9ba746/02aff/image3.webp 790w"
+              sizes="(max-width: 790px) 100vw, 790px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/1e363938a8d611ed8ca952063d9ba746/8ff5a/image3.png 240w,
+/static/1e363938a8d611ed8ca952063d9ba746/e85cb/image3.png 480w,
+/static/1e363938a8d611ed8ca952063d9ba746/2e237/image3.png 790w"
+            sizes="(max-width: 790px) 100vw, 790px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/1e363938a8d611ed8ca952063d9ba746/2e237/image3.png"
+            alt="image3.png"
+            title="image3.png"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<ol>
+<li><strong>Repository URL</strong>
+<ul>
+<li>해당 Repository URL 입력(<a href="https://git-1.cocone.jp/syf/hello-cocone-front-v2.git" target="_blank" rel="nofollow noopener noreferrer">https://git-1.cocone.jp/syf/hello-cocone-front-v2.git</a> → GitLab > Clone > HTTPS clone 복사)</li>
+</ul>
+</li>
+<li><strong>Credentials</strong>
+<ul>
+<li>추가되어있는 자격증명 키 입력
+<ul>
+<li>키가 없을 경우 gitlab 레포의 Project information - Members - ‘syf_jenkins’ (Developer 권한) 추가</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Branch Specifier (blank for ‘any’)</strong>
+<ul>
+<li>이벤트가 일어날 git branch 입력 (ex. /develop)</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-2-빌드-유발" style="position:relative;"><a href="#2-2-%EB%B9%8C%EB%93%9C-%EC%9C%A0%EB%B0%9C" aria-label="2 2 빌드 유발 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2-2. 빌드 유발</h3>
+<ul>
+<li>빌드가 일어날 상태를 정의</li>
+<li>필요에 따라 항목을 선택
+<span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 954px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/5d31becf159106a124737573569efd85/eb2af/image4.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 86.25%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAYAAADdRIy+AAAACXBIWXMAABYlAAAWJQFJUiTwAAABrElEQVQ4y5WU6ZKjMAyEef+HzAWYy7cx2Cap3pISdmZqZmfJj6+EjdOR1DJVLgXtIDEqi25SGJWB1hqTNrwelOG9blRQ1kP7GdoFaDd/8NqzIaJKKaFpWxhjsG0bcs4M7b9DTgklZ1T3bUPbNDifz2iaBm3bQgjBh0opLP5T3KE1aWgfcRkMqrzdca0FTqcT6rqGlJLx3iOEwPHzM0Xn3Jf9OAf00uA2WlS53FELCSFazpDE6JC1ltuws68pUo+Jfe2dwyg1pJtRUd/E5HA6X9B1Hf/rnsHn0o5A5bNgCB7DMKDvexalSILrujJHTFmJNT0FrXVsBEGCxN7LaZq4Bb85T+76uGCy855h4B9SluM4MjHGLyL7OP0PFlRK4na74Xq9MpQZ9eTdWSRYUBvLWS7LwpntfXvXlL+Cg54huh5STjwKSik25WiZPOwvnqYYw4aQEI2MteZbD3+9djkhxIXv9LNkrXlUCDKGsqOD9O5IqXQu5YIQV1T/uqfHs3ueIw/Sur56OAz8UaDRIWhs6EodFd1KRq8sLr1G9Xg8WJ1419WPkguWlGHnFX8AAWAgCy0j8QoAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/5d31becf159106a124737573569efd85/8ac56/image4.webp 240w,
+/static/5d31becf159106a124737573569efd85/d3be9/image4.webp 480w,
+/static/5d31becf159106a124737573569efd85/d7803/image4.webp 954w"
+              sizes="(max-width: 954px) 100vw, 954px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/5d31becf159106a124737573569efd85/8ff5a/image4.png 240w,
+/static/5d31becf159106a124737573569efd85/e85cb/image4.png 480w,
+/static/5d31becf159106a124737573569efd85/eb2af/image4.png 954w"
+            sizes="(max-width: 954px) 100vw, 954px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/5d31becf159106a124737573569efd85/eb2af/image4.png"
+            alt="image4.png"
+            title="image4.png"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></li>
+</ul>
+<ol>
+<li><strong>빌드를 원격으로 유발</strong></li>
+</ol>
+<ul>
+<li>외부에서 URL을 통해 빌드를 진행할 수 있도록 설정</li>
+<li>인증 토큰값 설정 - 외부 파라미터로 토큰 전달받아 일치시 빌드 진행</li>
+</ul>
+<ol start="2">
+<li><strong>Build after other projects are built</strong></li>
+</ol>
+<ul>
+<li>다른 프로젝트를 빌드한 후 이어서 현재 프로젝트 빌드</li>
+<li>빌드 결과 stable/unstable/fails에 따른 빌드 진행 설정</li>
+</ul>
+<ol start="3">
+<li><strong>Build periodically</strong></li>
+</ol>
+<ul>
+<li>설정해 놓은 시간에 자동으로 빌드 진행</li>
+</ul>
+<ol start="4">
+<li><strong>Build when a change is pushed to GitLab…</strong></li>
+</ol>
+<ul>
+<li><strong>push event</strong> git Repository 에 push 이벤트가 일어났을 경우 실행</li>
+<li><strong>Opened Merge Request Events</strong> pull request 가 생성되었을경우 시행</li>
+<li>**Approved Merge Requests (EE-only)**pull request가 병합 되었을경우 실행</li>
+</ul>
+<ol start="5">
+<li><strong>Github hook trigger for GITSom polling</strong></li>
+</ol>
+<ul>
+<li>Github 저장소와 젠킨스 프로젝트를 연동을 통해 빌드 환경을 구성 한 후,</li>
+<li>Github Webhook을 이용하여 Github 저장소에 push된 것이 있다면 그 때 젠킨스가 polling하여 빌드 실행</li>
+</ul>
+<ol start="6">
+<li><strong>Poll SCM</strong></li>
+</ol>
+<ul>
+<li>형상관리 서버를 주기적으로 감시하여 변경된 사항이 존재할때 빌드 수행</li>
+<li>시간값을 등록, 해당 시간에 형상관리 서버를 확인하여 변경된 사항이 있다면 빌드 수행</li>
+</ul>
+<h3 id="2-2-gitlab-빌드-유발-관련-gitlab-설정" style="position:relative;"><a href="#2-2-gitlab-%EB%B9%8C%EB%93%9C-%EC%9C%A0%EB%B0%9C-%EA%B4%80%EB%A0%A8-gitlab-%EC%84%A4%EC%A0%95" aria-label="2 2 gitlab 빌드 유발 관련 gitlab 설정 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2-2-GitLab. 빌드 유발 관련 GitLab 설정</h3>
+<p>빌드 유발 세팅 후 GitLab에 추가 설정 필요
+<span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 960px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/45bce0ba18eab43572b341355f0c0e04/5fada/image5.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 31.25%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAABYlAAAWJQFJUiTwAAAA1klEQVQY02WQyZLDMAhE/f/f6WUSa7FBQqAcOiV5nEpKh3dAtLqB6fHcEeOBLAWZGEJ0kRKklE6SgngyQozIIpCiKPpLe7NaMS3rBud2pJSQn39I69wRv8PMYNY+GOJJcM5BVVFr/e99oQqziqmJtm0DM/ckrRVqdtHqLjQQJzjnQXRCsgyGd9DkvIf3fkz8oglTFuzNkBmq1tcbtM3Qh4DjOD6TjGsYtAjOEPBYl35fyxlaymeLpul3VMNERP1+9yQDrxeUCbTMoHWGBYfaYOq9W3eZGt4x0NCXBIoFjgAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/45bce0ba18eab43572b341355f0c0e04/8ac56/image5.webp 240w,
+/static/45bce0ba18eab43572b341355f0c0e04/d3be9/image5.webp 480w,
+/static/45bce0ba18eab43572b341355f0c0e04/e46b2/image5.webp 960w,
+/static/45bce0ba18eab43572b341355f0c0e04/f992d/image5.webp 1440w,
+/static/45bce0ba18eab43572b341355f0c0e04/25962/image5.webp 1706w"
+              sizes="(max-width: 960px) 100vw, 960px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/45bce0ba18eab43572b341355f0c0e04/8ff5a/image5.png 240w,
+/static/45bce0ba18eab43572b341355f0c0e04/e85cb/image5.png 480w,
+/static/45bce0ba18eab43572b341355f0c0e04/d9199/image5.png 960w,
+/static/45bce0ba18eab43572b341355f0c0e04/07a9c/image5.png 1440w,
+/static/45bce0ba18eab43572b341355f0c0e04/5fada/image5.png 1706w"
+            sizes="(max-width: 960px) 100vw, 960px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/45bce0ba18eab43572b341355f0c0e04/d9199/image5.png"
+            alt="image5.png"
+            title="image5.png"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<ol>
+<li>Build when a change is pushed to GitLab. GitLab webhook URL 복사해두기</li>
+<li>빌드 유발 하단 > 고급… > Secret token 복사해두기</li>
+</ol>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 918px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/81cdba4c310f5cda2b28f2269515a382/e0885/image6.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 178.33333333333334%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAkCAYAAACJ8xqgAAAACXBIWXMAABYlAAAWJQFJUiTwAAAFCElEQVRIx52W+W7bRhDG/ZR9nr5A36P/FSiKIEiTNk5s2Y4lWbclWZYPXaR438eS/BW7lOWjdhOUwKeZ3SVHs/PNzO5BaWj4f72Dyw4M2z+Mqt+sMWhRtU+ofBf5HFQ3U6xmA8d2sDdr3K2Oq+uY6xXWeo292eDqGo6u4W23Ssp3iihEBD5CCPJRFxZzKmVwuyH6+hGvfYp3fkx0cUbQOsFvNvYI26eErVM1/wAxvKAYdSjGPYpWA1y7NiiApZ1gmiau55ELwVtP9URWr61VFQdEIc55g9u//2TTOMQ8bxD223jdJtHggqDXIh334WZCNR/DXMpar8djuJlSZekuhnczzJND1vM53vKezDSItxrJDrltUjgWpedQuraS1Q6la6lYyq2zutvFcDEn+Pweb9DBbp1i7SB1p31GPOyQjLrKWyWHHYJ+m6DXVmv59YT89DPoq9qg3Le1vMfXNRLLJDYNImOrkNiWGksEW12ty3lPMr9Zq/nC96iSuI6rjGEZhsyPjrCHXdjc11i/gs1iJ3f6w1hudXHzGMNsfsXtx7+wrsY446FyXbmvraj0HbQavBxrS7AN6H6jWt3VBuU/+oslcytmo28xXJ+sqtOg3OGp/hKFlLtd1DFc3lKuF6zsmKv5BsPN2dopayNCtxI0M1G6ZiVsnQzdTjGcTL1nOCnbCJzLqQpFzfL9HFa3mK7P4m7JerVhs9ZZrTQsy2Gz0Vks1piGjW27mIZFkqQIUZBnOTkg5lOkY7WH2or0ywecb8e4p4f4344Q/RZM+zDpPcf4QXZrXHZhOoDWMZWMpfIQSOIYQ9OwZPFbFkkYEXo+gesiJHtlQVWIV1BQCaHShYe0kXkYxTFhFFGUJVmeq3pWyAWiKCiKkvLhozdq/MHogfxJkxTbtgmDkCiKiKKYOI5JkkSNfd8nS7O9F29hb1B+rGkaruspIw/GwjBUelmWe2Pfe5RB+bFhmKqFSY/SNFWQ81JmWfYvo28ZP5ALkhTbsvFcj8D3iaNoh1gZlKHIs2wXMLm9ci/Vdsvy+ZazosB0XAUvjBBlRZoLUlGQCkEmc64oibMcUfE2OZJlYRpoh4c4zRPssyPc8wbpoE3ab5P0W3s9G14Q95oImXtXQ6rpoIbU5aEVeLWHYn6F9ukT5qiPcdHEGXSIppeEkyHBeEA8G+OPBxR313V3kRWxvKGSUnYZ2SxkYu+bQxKRjntozVP8YVc1zGQ6orybUd7O9rK6u65x/wJyThrO8ydpU4LpB1hBhJ/mZPy/Z18pcRBgaDqWYRB4HpHvk0QRSPYeSux7eMpyUlbKOzdO8NOs7iBPemH1BquveljFEcFogNVpYl2cq8MqngwJL/sqlixvYHED9/PHOD7DDHnQ7WOYXV9x/e4Dm25bsWx0WoTTEclsQjIbk15PCCcjspur+vxQLN8+YXn9gmXbIP32he3pV4zGIcbJF6Juk6TfJh1cIEbdWl72dvn3FDIPR8/zUMVQFBi2g+V6uLLjpJmqkuKNq8h/swz4YYRumBiWrUouTjOiJCGTzfMHSXlkuSzAsxG2ibBMcnNLZm5J9A25ZcCTq8erkLeuwHs0KG5nrP74De28oeKYTQYUVyO4ndaXoP3l6BVcj5GHXHX+lUqe0Yrl1ZLR7+9ZnBxjnTfw2meEvRbMLqlmo+9D3so6Z4+HVCZKfv51zE+/tLlbOlCkyNysovDHEAZUabIn5R9tya7RFi8l0gAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/81cdba4c310f5cda2b28f2269515a382/8ac56/image6.webp 240w,
+/static/81cdba4c310f5cda2b28f2269515a382/d3be9/image6.webp 480w,
+/static/81cdba4c310f5cda2b28f2269515a382/56bc7/image6.webp 918w"
+              sizes="(max-width: 918px) 100vw, 918px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/81cdba4c310f5cda2b28f2269515a382/8ff5a/image6.png 240w,
+/static/81cdba4c310f5cda2b28f2269515a382/e85cb/image6.png 480w,
+/static/81cdba4c310f5cda2b28f2269515a382/e0885/image6.png 918w"
+            sizes="(max-width: 918px) 100vw, 918px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/81cdba4c310f5cda2b28f2269515a382/e0885/image6.png"
+            alt="image6.png"
+            title="image6.png"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<ol start="3">
+<li>
+<p>URL: Jenkis 에서 복사한 (Build when a change is pushed to GitLab. GitLab webhook URL) 입력</p>
+</li>
+<li>
+<p>Secret token: Jenkins 에서 복사한 (Secret token) 입력</p>
+</li>
+<li>
+<p>Trigger > 푸시 이벤트 체크 후 > Wildcard pattern 에 원하는 브랜치 입력</p>
+</li>
+<li>
+<p>Trigger > 머지 리퀘스트 이벤트 체크</p>
+</li>
+<li>
+<p>Trigger > Deployment events 체크</p>
+</li>
+<li>
+<p>SSL verification > Enable SSL verification 체크</p>
+</li>
+<li>
+<p>웹훅 추가 버튼 클릭</p>
+</li>
+</ol>
+<h3 id="2-3-build" style="position:relative;"><a href="#2-3-build" aria-label="2 3 build permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2-3. Build</h3>
+<p>Build 시 실행되어야 할 스크립트 정의
+<span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 960px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/6d152f4f6fbe8f4e0e474dadda9ac559/d30ee/image7.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 92.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAYAAACQjC21AAAACXBIWXMAABYlAAAWJQFJUiTwAAACJ0lEQVQ4y62U246jMAyG+/7vtyvNxWhntG1pIZDEORJC/5UNTLs9rOZikT6ZQLBj+ze7kxrQG8K511Ca0PZG7FlpDMZgMFbeDdbB+AjjwiMxQ/uIMk3Y/fr4REgZzkeQ89CWYMmJJecEeeY8yAeQ32yQ/RQiTNuBtMFUK3bN8YjD4YD9fg+yFqUUjDljHMeVfGPvSAnlMoN+/sDh/QMTgF3bduKwbVvknDFNkzgtZbNXrkFuyBnlAvi0fLvTWqPve1hrMQwDeM2Wn92unXNfTu8DlXFETgmVU1ZKyeYQghBjRGDW+42UkmTwirQ55GP+j4udScopZcRc4GOWOvg0Ctx5jirv+ZQpieWUpc438JpPWdnh6dxif+5xGghHZdH0VuxJaXA5uJZdt1qlQOQkUIz3xCVlw03hOhJJx2qdJNL0goeGrHAQ0SF38Ng00s10V+inMnlCqRV5HJeU2RGnZozBds9B7Cby8cozubCzpBS81qjzzMI+o2kakcmjeNPXVGzS+IsYkacK+/aG3++fmC4X7FTHRe/gvRc98smImABjMoiyWO95Ep7Xjx1xtyVlawJiSHJ8/oCZ54q5zmCJ1gqx8/wNHS6T4tGcNLqBMTDOiy5jvuqNU5ZyvID3SFNENkTorEczEJqeRI8HZdAZt9btKnBWwQM8DD7A+bA4dM5L/XJOmAoP/rhYHvh/zO4tLHb+by4/h35A1w/wIXxbdw86XNXBDv8ACyTCflJh71AAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/6d152f4f6fbe8f4e0e474dadda9ac559/8ac56/image7.webp 240w,
+/static/6d152f4f6fbe8f4e0e474dadda9ac559/d3be9/image7.webp 480w,
+/static/6d152f4f6fbe8f4e0e474dadda9ac559/e46b2/image7.webp 960w,
+/static/6d152f4f6fbe8f4e0e474dadda9ac559/58b01/image7.webp 980w"
+              sizes="(max-width: 960px) 100vw, 960px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/6d152f4f6fbe8f4e0e474dadda9ac559/8ff5a/image7.png 240w,
+/static/6d152f4f6fbe8f4e0e474dadda9ac559/e85cb/image7.png 480w,
+/static/6d152f4f6fbe8f4e0e474dadda9ac559/d9199/image7.png 960w,
+/static/6d152f4f6fbe8f4e0e474dadda9ac559/d30ee/image7.png 980w"
+            sizes="(max-width: 960px) 100vw, 960px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/6d152f4f6fbe8f4e0e474dadda9ac559/d9199/image7.png"
+            alt="image7.png"
+            title="image7.png"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<ol>
+<li>nodeJs 설치
+<ul>
+<li>하단 참조</li>
+</ul>
+</li>
+<li>Execute shell
+<ul>
+<li>빌드시 실행 시킬 명령어</li>
+</ul>
+<ol>
+<li><code class="language-text">cd /var/lib/jenkins/workspace/(프로젝트명)</code> - jenkins의 workspace(Dashboard)의 해당 프로젝트 위치</li>
+<li><code class="language-text">npm install</code> - node package 설치</li>
+<li><code class="language-text">CI=npm run build:dev</code>
+<ul>
+<li>build script 실행</li>
+<li>build script 앞에 <code class="language-text">CI=</code> 를 붙일 시 eslint 에러를 무시한다.</li>
+<li>eslint에러가 있을시 빌드 실패</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="2-4-build-후-조치" style="position:relative;"><a href="#2-4-build-%ED%9B%84-%EC%A1%B0%EC%B9%98" aria-label="2 4 build 후 조치 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2-4. Build 후 조치</h3>
+<p>빌드 후 일어날 작업
+<span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 960px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/6c0b98dc1309562b770b37883332f3c2/350de/image8.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 89.99999999999999%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAYAAABb0P4QAAAACXBIWXMAABYlAAAWJQFJUiTwAAABsUlEQVQ4y62UW3KkMAxF2f/eMluYTEKaly2D3zYfd0qiSTUJSbpr5uMUNlZdX4SkJqSMkRYY6zFoA2UWjDRj4qeeoYwFzQvIGMwufImxAT5mNBz4+88LhmmC9QHOByzWCbO18rTOwTHX8zN8iEg5o4kxou97DMMArTWUUoghoNaKUsqRnD+zriik0T39gisrGg5kwfb1FcYYccKX5JzvpqSEhQxiLmjYyTRNeH7rxcXKN5bykGDOBaVW1FrQsIAxhJfLIA6JSIKqBNzHboJpdjdrrUgpCZ9yd8p2afAOhrT8PBFkdXY1jCPqNfiRz2UDIQSEGDdBvsVai7ZtcRk1Iif5KvqTy9uYfS2C/Ge5XKyPyKU8lL+dg6D3HoYI3aSx+Cj5zHflsZw75BywSxF28byov+HUIXfKOI7oFf0fQa0U+nGCmh3W9R9z6LwXd2RmWG7ylBCvpJSlFTktkdc3Z7zncx4KzvljDnnq7J2iiWQva603iNCTFTqyuOgFLmw9L9PGB6njppatQ3LK751yW7TH/ZH9vYw37+XTm1ILzDKj7Tpc+kEOvpwqH3h/f1M2fwGolHO+R6NxpQAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/6c0b98dc1309562b770b37883332f3c2/8ac56/image8.webp 240w,
+/static/6c0b98dc1309562b770b37883332f3c2/d3be9/image8.webp 480w,
+/static/6c0b98dc1309562b770b37883332f3c2/e46b2/image8.webp 960w,
+/static/6c0b98dc1309562b770b37883332f3c2/7a915/image8.webp 998w"
+              sizes="(max-width: 960px) 100vw, 960px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/6c0b98dc1309562b770b37883332f3c2/8ff5a/image8.png 240w,
+/static/6c0b98dc1309562b770b37883332f3c2/e85cb/image8.png 480w,
+/static/6c0b98dc1309562b770b37883332f3c2/d9199/image8.png 960w,
+/static/6c0b98dc1309562b770b37883332f3c2/350de/image8.png 998w"
+            sizes="(max-width: 960px) 100vw, 960px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/6c0b98dc1309562b770b37883332f3c2/d9199/image8.png"
+            alt="image8.png"
+            title="image8.png"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<ol>
+<li>
+<p><strong>Name</strong>
+publish over SSH 로 설정한 원격 서버</p>
+</li>
+<li>
+<p><strong>Transfers</strong></p>
+<ol>
+<li><strong>Source files</strong>
+<ul>
+<li>해당 Item 으로 부터 원격 서버로 보낼 파일 or 폴더의 경로
+<ul>
+<li><code class="language-text">build/**</code> → <code class="language-text">/var/lib/jenkins/workspace/test/build/**</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Remove prefix</strong>
+<ul>
+<li>원격서버로 접속/파일 전송 시 source files 에서 제거할 폴더(경로) 명
+<ul>
+<li><code class="language-text">build/index.html</code> → <code class="language-text">index.html</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Remote directory</strong>
+<ul>
+<li>전송시킨 폴더(파일) 이 저장될 원격 서버 폴더 경로</li>
+</ul>
+</li>
+<li><strong>Exec command</strong>
+<ul>
+<li>파일 전송이 완료된 이후에 원격 서버에서 실행될 스크립트</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>Slack Notification</strong>
+빌드 경과 슬랙으로 전송 ‘고급’ - Include Custom Message에서 과정 별 메시지 설정 ‘빌드 후 조치 추가’ 메뉴에서 다른 알림 설정 가능
+<span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 960px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/219cffbf421b1980b2ecba8b80f17124/1ff84/image9.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 87.91666666666667%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAYAAABb0P4QAAAACXBIWXMAABYlAAAWJQFJUiTwAAABiElEQVQ4y6WU646DIBCF+/5vuD+6rRVBsN4oFwXSs4GqsdZN2l2TzzHjcJyDEw45LUFKgZxyiKZDWTXg1/YR6xbXpkVd1+ikQrOhvWk0ncSVCUhlIGWPw3fOcTwecTqfcVMK2hhoPWEmtIYx9hU7QEsJSQiMtej7HodLZVAyiqq6YhwGjOP4Gc7BhZDWJsGM30BIDiEqDMPwL5LgmSsUBQHnPCXjV+eCdzp8EcyEAi0KUEphrV2K3rX8IngqHx0WRYG2bf/fIa/l0qEQ4sn2nwRl34EQkgTnLp1zb3e5a5kxCkKKNMCz2Cej8ySYVxqcl2CMpdFZ/5g/jU1Vd7hkGb5PJ3ydizSgwyI4TqyfN2w7tEYvieA94nW/35/Yy22JrpKgMQbOe3jvUxxdjAF+RdxXn2rCLnHd0mG8UcYSlRDIWIXupjHYeACYdAjEg2J+3sekvZdRMJ4kEaVUejH5e1idmXJb1paji8WyDwEhhBTdjrXxE8tR2U37N+/lmpSfavwvOPeIUfAH3rl0kQvTxK0AAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/219cffbf421b1980b2ecba8b80f17124/8ac56/image9.webp 240w,
+/static/219cffbf421b1980b2ecba8b80f17124/d3be9/image9.webp 480w,
+/static/219cffbf421b1980b2ecba8b80f17124/e46b2/image9.webp 960w,
+/static/219cffbf421b1980b2ecba8b80f17124/02506/image9.webp 1040w"
+              sizes="(max-width: 960px) 100vw, 960px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/219cffbf421b1980b2ecba8b80f17124/8ff5a/image9.png 240w,
+/static/219cffbf421b1980b2ecba8b80f17124/e85cb/image9.png 480w,
+/static/219cffbf421b1980b2ecba8b80f17124/d9199/image9.png 960w,
+/static/219cffbf421b1980b2ecba8b80f17124/1ff84/image9.png 1040w"
+            sizes="(max-width: 960px) 100vw, 960px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/219cffbf421b1980b2ecba8b80f17124/d9199/image9.png"
+            alt="image9.png"
+            title="image9.png"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+</li>
+</ol>
+<h2 id="node-설치" style="position:relative;"><a href="#node-%EC%84%A4%EC%B9%98" aria-label="node 설치 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Node 설치</h2>
+<h3 id="1-nodejs-플러그인-설치" style="position:relative;"><a href="#1-nodejs-%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8-%EC%84%A4%EC%B9%98" aria-label="1 nodejs 플러그인 설치 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Nodejs 플러그인 설치</h3>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 960px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/fb4a62066da8d4bd6b047fca1eea3407/e72de/image10.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 29.166666666666668%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAyUlEQVQY032QbW/DIAyE8///4/Zh3dqI8pY4hkAIV2GVtKu2WjohMNxzeIgxgohEpRS0qrWK/qrX8363a7hqD6U0tNZi2E3buiwM5xy89zDGIOcsPZ9GzDSDmcVk3/cDNBAFMAe0pF1AxZoLJmJYa2CsxTRNSCnJIx2/YK4KSqkD2MzFcCYGh4BStscX2rptWJlBy3KH/B5FWZMAeroj4cfnCePYSFZI3jmEGJGJYH++cb5cJEnrPYz3f+c79E0jPau+DP05yTvdAC6Q1YS/4MIgAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/fb4a62066da8d4bd6b047fca1eea3407/8ac56/image10.webp 240w,
+/static/fb4a62066da8d4bd6b047fca1eea3407/d3be9/image10.webp 480w,
+/static/fb4a62066da8d4bd6b047fca1eea3407/e46b2/image10.webp 960w,
+/static/fb4a62066da8d4bd6b047fca1eea3407/40d0b/image10.webp 1198w"
+              sizes="(max-width: 960px) 100vw, 960px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/fb4a62066da8d4bd6b047fca1eea3407/8ff5a/image10.png 240w,
+/static/fb4a62066da8d4bd6b047fca1eea3407/e85cb/image10.png 480w,
+/static/fb4a62066da8d4bd6b047fca1eea3407/d9199/image10.png 960w,
+/static/fb4a62066da8d4bd6b047fca1eea3407/e72de/image10.png 1198w"
+            sizes="(max-width: 960px) 100vw, 960px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/fb4a62066da8d4bd6b047fca1eea3407/d9199/image10.png"
+            alt="image10.png"
+            title="image10.png"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span>
+<code class="language-text">Dashboard → jenkins관리 → 플러그인 관리</code></p>
+<ul>
+<li>설치 가능 탭 확인
+<span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 960px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/395832e69622cfb5bffd65522715fef3/e8950/image11.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 22.083333333333332%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAIAAAABPYjBAAAACXBIWXMAAAsTAAALEwEAmpwYAAAApUlEQVQI132LOwuCUBzF7+duaWp3SCgpwsrE6gMEDU1B0NDLzF7QUkOSeiWi8v+Ia43S4TecwzlHuJ4/nkxn86W73rTsXqFY0nRjsfK2+6O/O/xHDIajpt2vtx3DtCu1plY29GrDtByz0/1h5ZFVAojfyOf4Ed6fnImYkQiJABGRiAgAQTmVvx6JmFmkAK8ULkF0C6MgkqerjGUSywRA7TH756H0Aeq7y/0YGJipAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/395832e69622cfb5bffd65522715fef3/8ac56/image11.webp 240w,
+/static/395832e69622cfb5bffd65522715fef3/d3be9/image11.webp 480w,
+/static/395832e69622cfb5bffd65522715fef3/e46b2/image11.webp 960w,
+/static/395832e69622cfb5bffd65522715fef3/f992d/image11.webp 1440w,
+/static/395832e69622cfb5bffd65522715fef3/882b9/image11.webp 1920w,
+/static/395832e69622cfb5bffd65522715fef3/b84eb/image11.webp 2000w"
+              sizes="(max-width: 960px) 100vw, 960px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/395832e69622cfb5bffd65522715fef3/8ff5a/image11.png 240w,
+/static/395832e69622cfb5bffd65522715fef3/e85cb/image11.png 480w,
+/static/395832e69622cfb5bffd65522715fef3/d9199/image11.png 960w,
+/static/395832e69622cfb5bffd65522715fef3/07a9c/image11.png 1440w,
+/static/395832e69622cfb5bffd65522715fef3/29114/image11.png 1920w,
+/static/395832e69622cfb5bffd65522715fef3/e8950/image11.png 2000w"
+            sizes="(max-width: 960px) 100vw, 960px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/395832e69622cfb5bffd65522715fef3/d9199/image11.png"
+            alt="image11.png"
+            title="image11.png"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></li>
+</ul>
+<h3 id="2-nodejs-빌드-설정" style="position:relative;"><a href="#2-nodejs-%EB%B9%8C%EB%93%9C-%EC%84%A4%EC%A0%95" aria-label="2 nodejs 빌드 설정 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Nodejs 빌드 설정</h3>
+<p><code class="language-text">Dashboard → jenkins관리 → Global Tool Configuration</code></p>
+<ul>
+<li>NodeJs 항목
+<span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 960px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/c4a31efb40f1dff6a8262b305017e490/e8950/image12.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 43.75%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAIAAAC9o5sfAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAm0lEQVQoz52RWwqEMAxFu/89zGzDxbiCWgippWlq0jioCCIojucrP/eRxA1DMLP5FS7GOL/FIcZCpKrtH0R0EnWICACttZOrrVxlmlkzcykl733OWUSmHVV9VDvnHEIAgLJDRNvAzDfNzcyVUsZxTCkx8xYrB26WXsS1VmZeOte6iY+r2on1NIIIXTeFsIhV5OlzVt9G5L+f0vc/88kSaeI0xncAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/c4a31efb40f1dff6a8262b305017e490/8ac56/image12.webp 240w,
+/static/c4a31efb40f1dff6a8262b305017e490/d3be9/image12.webp 480w,
+/static/c4a31efb40f1dff6a8262b305017e490/e46b2/image12.webp 960w,
+/static/c4a31efb40f1dff6a8262b305017e490/f992d/image12.webp 1440w,
+/static/c4a31efb40f1dff6a8262b305017e490/882b9/image12.webp 1920w,
+/static/c4a31efb40f1dff6a8262b305017e490/b84eb/image12.webp 2000w"
+              sizes="(max-width: 960px) 100vw, 960px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/c4a31efb40f1dff6a8262b305017e490/8ff5a/image12.png 240w,
+/static/c4a31efb40f1dff6a8262b305017e490/e85cb/image12.png 480w,
+/static/c4a31efb40f1dff6a8262b305017e490/d9199/image12.png 960w,
+/static/c4a31efb40f1dff6a8262b305017e490/07a9c/image12.png 1440w,
+/static/c4a31efb40f1dff6a8262b305017e490/29114/image12.png 1920w,
+/static/c4a31efb40f1dff6a8262b305017e490/e8950/image12.png 2000w"
+            sizes="(max-width: 960px) 100vw, 960px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/c4a31efb40f1dff6a8262b305017e490/d9199/image12.png"
+            alt="image12.png"
+            title="image12.png"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span>
+<ol>
+<li><strong>Name</strong> 표기할 nodeJs 이름 작성</li>
+<li><strong>Install from <a href="http://nodejs.org/" target="_blank" rel="nofollow noopener noreferrer">nodejs.org</a></strong></li>
+</ol>
+<ul>
+<li>Version - 사용할 nodejs 버전 선택</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-프로젝트-설정" style="position:relative;"><a href="#3-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%84%A4%EC%A0%95" aria-label="3 프로젝트 설정 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. 프로젝트 설정</h3>
+<p><strong><code class="language-text">Dashboad → 작업 프로젝트 → 구성</code></strong></p>
+<ul>
+<li>구성 페이지에서 아래로 스크롤시 <strong>Build</strong> 항목</li>
+<li>3-1. Add build step
+<span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 960px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/7f4f5c2680fa52b47ee5e8bc577a7d13/e8950/image14.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 24.166666666666664%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAIAAADKYVtkAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAaElEQVQY05XOSw7CMAxFUe9/b0zpECpsWlIpRq7AnzgIVWwgnPnVe1Are4T9yw9wOs/TtVzKm6qr6mCpIm4G8w1lf7X8eORQrOqtCaEwAyKVbcvM3vvosplFqBkg0X1Zl/XB/PRhvwtfmQEgTB+p3PAAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/7f4f5c2680fa52b47ee5e8bc577a7d13/8ac56/image14.webp 240w,
+/static/7f4f5c2680fa52b47ee5e8bc577a7d13/d3be9/image14.webp 480w,
+/static/7f4f5c2680fa52b47ee5e8bc577a7d13/e46b2/image14.webp 960w,
+/static/7f4f5c2680fa52b47ee5e8bc577a7d13/f992d/image14.webp 1440w,
+/static/7f4f5c2680fa52b47ee5e8bc577a7d13/882b9/image14.webp 1920w,
+/static/7f4f5c2680fa52b47ee5e8bc577a7d13/b84eb/image14.webp 2000w"
+              sizes="(max-width: 960px) 100vw, 960px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/7f4f5c2680fa52b47ee5e8bc577a7d13/8ff5a/image14.png 240w,
+/static/7f4f5c2680fa52b47ee5e8bc577a7d13/e85cb/image14.png 480w,
+/static/7f4f5c2680fa52b47ee5e8bc577a7d13/d9199/image14.png 960w,
+/static/7f4f5c2680fa52b47ee5e8bc577a7d13/07a9c/image14.png 1440w,
+/static/7f4f5c2680fa52b47ee5e8bc577a7d13/29114/image14.png 1920w,
+/static/7f4f5c2680fa52b47ee5e8bc577a7d13/e8950/image14.png 2000w"
+            sizes="(max-width: 960px) 100vw, 960px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/7f4f5c2680fa52b47ee5e8bc577a7d13/d9199/image14.png"
+            alt="image14.png"
+            title="image14.png"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span>
+Add build step 버튼 클릭 후 execute NodeJs script 선택</li>
+<li>3-2. Execute NodeJs script
+NodeJS Script 는 3 항목(Execute Shell) 에서 입력
+<span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 960px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/b61787b8582e1acb2284f7b6cd7ec098/e8950/image15.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 35.833333333333336%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAIAAACHqfpvAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAjklEQVQY033PwQ6DMAwD0P7/V44LG0xQxW7TJmhsAzQJTcC7205C3z9Jqqrt1Aul2DShbTMQROTWNMMw1FpVy6bWaufcXUEyLeExRpIARASrv0MOC8wsuPv7yDzPr0vuHnLOESkyj0gjCBCkrOO+1vuJZVmA+6MDUzHTUvRn+/xaINl1/fZsTnna8Uvf8Acvy5YcOPcZEQAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/b61787b8582e1acb2284f7b6cd7ec098/8ac56/image15.webp 240w,
+/static/b61787b8582e1acb2284f7b6cd7ec098/d3be9/image15.webp 480w,
+/static/b61787b8582e1acb2284f7b6cd7ec098/e46b2/image15.webp 960w,
+/static/b61787b8582e1acb2284f7b6cd7ec098/f992d/image15.webp 1440w,
+/static/b61787b8582e1acb2284f7b6cd7ec098/882b9/image15.webp 1920w,
+/static/b61787b8582e1acb2284f7b6cd7ec098/b84eb/image15.webp 2000w"
+              sizes="(max-width: 960px) 100vw, 960px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/b61787b8582e1acb2284f7b6cd7ec098/8ff5a/image15.png 240w,
+/static/b61787b8582e1acb2284f7b6cd7ec098/e85cb/image15.png 480w,
+/static/b61787b8582e1acb2284f7b6cd7ec098/d9199/image15.png 960w,
+/static/b61787b8582e1acb2284f7b6cd7ec098/07a9c/image15.png 1440w,
+/static/b61787b8582e1acb2284f7b6cd7ec098/29114/image15.png 1920w,
+/static/b61787b8582e1acb2284f7b6cd7ec098/e8950/image15.png 2000w"
+            sizes="(max-width: 960px) 100vw, 960px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/b61787b8582e1acb2284f7b6cd7ec098/d9199/image15.png"
+            alt="image15.png"
+            title="image15.png"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span>
+<ol>
+<li>NodeJs Installation</li>
+<li>NodeJs 빌드 설정 에서 생성한 nodeJs 선택</li>
+</ol>
+</li>
+<li>3-3. Execute Shell
+<strong>Command</strong>실행할 빌드 스크립트 입력<code class="language-text">ex) npm i / npm run build</code>
+<span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 960px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/7f94686ce85a40b1317aeee02573b34a/e8950/image16.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 22.499999999999996%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAIAAADKYVtkAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAVklEQVQY05XIOw6AIBAFwL3/PYlELRbR/bxFYmViqGTKoSVnEdEpIgrUlAhAf90zeu9kCHUYoI6IaB/R2jAD2kvduO5cVz7OS9z+ukSJubgb4IBPUbMHy8QjwBodCsgAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/7f94686ce85a40b1317aeee02573b34a/8ac56/image16.webp 240w,
+/static/7f94686ce85a40b1317aeee02573b34a/d3be9/image16.webp 480w,
+/static/7f94686ce85a40b1317aeee02573b34a/e46b2/image16.webp 960w,
+/static/7f94686ce85a40b1317aeee02573b34a/f992d/image16.webp 1440w,
+/static/7f94686ce85a40b1317aeee02573b34a/882b9/image16.webp 1920w,
+/static/7f94686ce85a40b1317aeee02573b34a/b84eb/image16.webp 2000w"
+              sizes="(max-width: 960px) 100vw, 960px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/7f94686ce85a40b1317aeee02573b34a/8ff5a/image16.png 240w,
+/static/7f94686ce85a40b1317aeee02573b34a/e85cb/image16.png 480w,
+/static/7f94686ce85a40b1317aeee02573b34a/d9199/image16.png 960w,
+/static/7f94686ce85a40b1317aeee02573b34a/07a9c/image16.png 1440w,
+/static/7f94686ce85a40b1317aeee02573b34a/29114/image16.png 1920w,
+/static/7f94686ce85a40b1317aeee02573b34a/e8950/image16.png 2000w"
+            sizes="(max-width: 960px) 100vw, 960px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/7f94686ce85a40b1317aeee02573b34a/d9199/image16.png"
+            alt="image16.png"
+            title="image16.png"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></li>
+</ul></div></div></div><div class="Post-module--footer--f8705"><div class="Meta-module--meta--dae0a"><p class="Meta-module--date--4d30d">Published<!-- --> <!-- -->Sep 26, 2023</p></div><div class="Tags-module--tags--18589"><ul class="Tags-module--list--82ae6"><li class="Tags-module--item--52015"><a class="Button-module--button--b1113" href="/tag/jenkins/">Jenkins</a></li><li class="Tags-module--item--52015"><a class="Button-module--button--b1113" href="/tag/cicd/">CI/CD</a></li></ul></div><div class="Author-module--author--1c58d"><p class="Author-module--bio--08950">프론트엔드 개발자 김가영입니다. 개발과 일에 대한 생각을 주로 씁니다. https://velog.io/@kykim_dev/posts (2023 이전 블로깅)</p></div></div><div class="Post-module--comments--d3b99"></div></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/posts/Jenkins-CI/CD-프론트-환경-구축하기";window.___webpackCompilationHash="26efb5abbb58517c4f87";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-a70f9d4cac1b78b09804.js"],"component---cache-caches-gatsby-plugin-offline-app-shell-js":["/component---cache-caches-gatsby-plugin-offline-app-shell-js-0c915c7b1bdb5eac4fdf.js"],"component---src-templates-categories-template-categories-template-tsx":["/component---src-templates-categories-template-categories-template-tsx-137238e444d313754b01.js"],"component---src-templates-category-template-category-template-tsx":["/component---src-templates-category-template-category-template-tsx-33f79dd269fc425931db.js"],"component---src-templates-index-template-index-template-tsx":["/component---src-templates-index-template-index-template-tsx-f28258cd90c7b87b90a9.js"],"component---src-templates-not-found-template-not-found-template-tsx":["/component---src-templates-not-found-template-not-found-template-tsx-59ab4889a006f6b6b418.js"],"component---src-templates-page-template-page-template-tsx":["/component---src-templates-page-template-page-template-tsx-ff6ca5ae4398536e97b2.js"],"component---src-templates-post-template-post-template-tsx":["/component---src-templates-post-template-post-template-tsx-bf408e7aa8e87d12df32.js"],"component---src-templates-tag-template-tag-template-tsx":["/component---src-templates-tag-template-tag-template-tsx-7671a9832960b0a79956.js"],"component---src-templates-tags-template-tags-template-tsx":["/component---src-templates-tags-template-tags-template-tsx-622232ef81577a36056e.js"]};/*]]>*/</script><script src="/app-a70f9d4cac1b78b09804.js" async=""></script><script src="/framework-745d5d28c0250a1a333b.js" async=""></script><script src="/webpack-runtime-dfe333d4dcceff0d6cd8.js" async=""></script></body></html>
