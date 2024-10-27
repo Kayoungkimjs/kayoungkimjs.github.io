@@ -1,9 +1,9 @@
 ---
 title: "JavaScript 서브 라이브러리"
-seoTitle: "javascript, craco, "
+seoTitle: "javascript, craco,"
 datePublished: Sun Aug 07 2022 15:00:00 GMT+0000 (Coordinated Universal Time)
 cuid: cm2rgjse1000108jw6tca1ptu
-slug: javascript
+slug: tech
 tags: javascript, javascript-framework
 
 ---
