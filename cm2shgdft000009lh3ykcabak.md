@@ -1,5 +1,5 @@
 ---
-title: "[snippet] 배열 생성하기"
+title: "[Snippet] 배열 생성하기"
 datePublished: Mon Oct 28 2024 03:52:25 GMT+0000 (Coordinated Universal Time)
 cuid: cm2shgdft000009lh3ykcabak
 slug: snippet
